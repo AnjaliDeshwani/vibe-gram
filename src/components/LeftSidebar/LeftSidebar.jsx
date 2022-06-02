@@ -7,7 +7,7 @@ export const LeftSidebar = () => {
   };
   return (
     <div className="sm:col-span-1 lg:col-span-2 flex justify-center">
-      <div className="lg:fixed mt-4 font-bold text-transparent text-3xl bg-clip-text bg-gradient-to-r from-sky-500 to-cyan-400 -tracking-wide italic">
+      <div className="lg:fixed pb-4 mt-4 font-bold text-transparent text-3xl bg-clip-text bg-gradient-to-r from-sky-500 to-cyan-400 -tracking-wide italic">
         Vibegram
       </div>
       <nav className="fixed z-10 w-full sm:w-auto bg-gray-100 sm:bg-transparent border-t-2 sm:border-t-0 border-t-slate-300 bottom-0 sm:bottom-auto flex flex-row justify-between sm:flex-col  gap-10 sm:gap-6 text-xl mt-16">
