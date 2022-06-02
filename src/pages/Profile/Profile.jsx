@@ -23,9 +23,14 @@ export const Profile = () => {
                 <span className="font-bold tracking-wide">Charlie Putin</span>
                 <span className="text-gray-500 text-sm">@charlieputin</span>
               </div>
-              <button className="self-baseline font-semibold border-2 border-slate-400 py-1 px-4 rounded-full text-sm hover:bg-slate-200 hover:border-slate-400">
-                Edit Profile
-              </button>
+              <div className="flex gap-4">
+                <button className="self-baseline font-semibold border-2 border-slate-400 py-1 px-4 rounded-full text-sm hover:bg-slate-200 hover:border-slate-400">
+                  Edit Profile
+                </button>
+                <span className="cursor-pointer">
+                  <i className="fa-solid fa-arrow-right-from-bracket"></i>
+                </span>
+              </div>
             </div>
             <p className="font-semibold">Hey there, bio in progress</p>
             <div className="flex gap-3">
