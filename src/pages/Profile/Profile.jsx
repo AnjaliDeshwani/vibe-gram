@@ -1,3 +1,5 @@
+import { useDispatch } from "react-redux";
+import { logoutHandler } from "../../reducers/authSlice";
 import {
   LeftSidebar,
   RightSidebar,
@@ -5,6 +7,10 @@ import {
   SearchBar,
 } from "../../components";
 export const Profile = () => {
+  const dispatch = useDispatch();
+  const logoutClickHandler = () => {
+    dispatch(logoutHandler());
+  };
   return (
     <div className="min-h-screen grid sm:grid-cols-6 lg:grid-cols-10  w-full sm:w-[80%] sm:gap-12 lg:gap-4 mx-auto">
       <LeftSidebar />
@@ -27,7 +33,7 @@ export const Profile = () => {
                 <button className="self-baseline font-semibold border-2 border-slate-400 py-1 px-4 rounded-full text-sm hover:bg-slate-200 hover:border-slate-400">
                   Edit Profile
                 </button>
-                <span className="cursor-pointer">
+                <span className="cursor-pointer" onClick={logoutClickHandler}>
                   <i className="fa-solid fa-arrow-right-from-bracket"></i>
                 </span>
               </div>
