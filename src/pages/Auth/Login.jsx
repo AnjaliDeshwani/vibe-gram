@@ -10,19 +10,22 @@ export const Login = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-  const [loginCred, setLoginCred] = useState({ email: "", password: "" });
+  const [loginCred, setLoginCred] = useState({ username: "", password: "" });
   const { showPass, togglePassword } = useShowPassword();
 
   const guestLoginCred = {
-    email: "test@gmail.com",
+    username: "test_test",
     password: "test123",
   };
 
-  const emailHandler = (e) => {
-    setLoginCred({ ...loginCred, email: e.target.value });
-  };
-  const passwordHandler = (e) => {
-    setLoginCred({ ...loginCred, password: e.target.value });
+  // const usernameHandler = (e) => {
+  //   setLoginCred({ ...loginCred, email: e.target.value });
+  // };
+  // const passwordHandler = (e) => {
+  //   setLoginCred({ ...loginCred, password: e.target.value });
+  // };
+  const formChangeHandler = (e) => {
+    setLoginCred({ ...loginCred, [e.target.name]: e.target.value });
   };
   const submitHandler = (e) => {
     e.preventDefault();
@@ -31,7 +34,7 @@ export const Login = () => {
 
   const guestLoginHandler = () => {
     setLoginCred({
-      email: guestLoginCred.email,
+      username: guestLoginCred.username,
       password: guestLoginCred.password,
     });
   };
@@ -53,28 +56,33 @@ export const Login = () => {
             <div className="mt-4 bg-white shadow-md rounded-lg text-left">
               <div className="h-2 bg-sky-400 rounded-t-md"></div>
               <form className="py-6 px-8" onSubmit={submitHandler}>
-                <label className="block font-semibold">Email</label>
+                <label className="block font-semibold">Username</label>
 
                 <input
-                  type="email"
-                  placeholder="Email"
+                  type="text"
+                  placeholder="Username"
                   className="border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-1 focus:ring-sky-600 rounded-md"
-                  value={loginCred.email}
-                  onChange={emailHandler}
+                  name="username"
+                  value={loginCred.username}
+                  onChange={formChangeHandler}
                   required
                 />
 
                 <label className="block mt-3 font-semibold">Password</label>
-                <div className="relative flex items-center cursor-pointer">
+                <div className="relative flex items-center mt-2">
                   <input
                     type={`${showPass ? "text" : "password"}`}
                     placeholder="Password"
-                    className="border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-1 focus:ring-sky-600 rounded-md"
+                    className="border w-full h-5 px-3 py-5  hover:outline-none focus:outline-none focus:ring-1 focus:ring-sky-600 rounded-md"
+                    name="password"
                     value={loginCred.password}
-                    onChange={passwordHandler}
+                    onChange={formChangeHandler}
                     required
                   />
-                  <span className="absolute right-3" onClick={togglePassword}>
+                  <span
+                    className="absolute right-3 cursor-pointer"
+                    onClick={togglePassword}
+                  >
                     <i
                       className={`fa-solid ${
                         showPass ? "fa-eye " : "fa-eye-slash"

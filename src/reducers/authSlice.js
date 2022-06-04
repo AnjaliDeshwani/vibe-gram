@@ -11,33 +11,35 @@ const initialState = {
 
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
-  async ({ email, password }, thunkAPI) => {
+  async ({ username, password }, thunkAPI) => {
     try {
       const response = await loginService({
-        email,
+        username,
         password,
       });
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue(error.response.data);
     }
   }
 );
 
 export const signupUser = createAsyncThunk(
   "auth/signupUser",
-  async ({ firstName, lastName, email, password }, thunkAPI) => {
+  async ({ firstName, lastName, email, username, password }, thunkAPI) => {
     try {
       const response = await singupService({
-        email,
+        username,
         password,
+        email,
         firstName,
         lastName,
       });
-
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue(
+        "Username Already Exists. Please choose different username."
+      );
     }
   }
 );
@@ -80,7 +82,6 @@ const authSlice = createSlice({
 
     [signupUser.fulfilled]: (state, action) => {
       state.authStatus = "success";
-      console.log(action.payload);
       state.user = action.payload.createdUser;
       state.token = action.payload.encodedToken;
       localStorage.setItem(
@@ -89,8 +90,8 @@ const authSlice = createSlice({
       );
     },
     [signupUser.rejected]: (state, action) => {
-      state.authStatus = "loading";
-      state.signupError = action.payload.errors;
+      state.authStatus = "rejected";
+      state.signupError = action.payload;
     },
   },
 });
