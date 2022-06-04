@@ -15,9 +15,7 @@ export const Explore = () => {
             <SearchBar />
           </div>
         </div>
-        {[...Array(8)].map(() => (
-          <LatestPost />
-        ))}
+        Explore Contents
       </div>
       <RightSidebar />
     </div>

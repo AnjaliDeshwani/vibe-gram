@@ -15,9 +15,7 @@ export const Bookmarks = () => {
             <SearchBar />
           </div>
         </div>
-        {[...Array(8)].map(() => (
-          <LatestPost />
-        ))}
+        Bookmarks Content
       </div>
       <RightSidebar />
     </div>

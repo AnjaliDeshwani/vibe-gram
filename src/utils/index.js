@@ -1,0 +1,1 @@
+export { getPostDate } from "./getPostDate";

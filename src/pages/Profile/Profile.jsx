@@ -53,9 +53,7 @@ export const Profile = () => {
           </div>
         </div>
         <div className="border-b-2 border-b-gray-200 my-2"></div>
-        {[...Array(8)].map(() => (
-          <LatestPost />
-        ))}
+        Profile Content
       </div>
       <RightSidebar />
     </div>
