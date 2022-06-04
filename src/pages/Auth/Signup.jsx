@@ -19,49 +19,12 @@ export const Signup = () => {
     password: "",
   });
 
-  const { firstName, lastName, email, username, password } = signUpForm;
-
-  const [formErrors, setFormErrors] = useState({
-    firstNameError: "",
-    lastNameError: "",
-    emailError: "",
-    usernameError: "",
-    passwordError: "",
-  });
-
   const formChangeHandler = (e) => {
     setSignUpForm({ ...signUpForm, [e.target.name]: e.target.value });
   };
 
-  const authValidation = () => {
-    if (firstName === "" || !/^[a-zA-Z]+$/.test(firstName)) {
-      formErrors.firstNameError = "Invalid firstname";
-    }
-    if (lastName === "" || !/^[a-zA-Z]+$/.test(lastName)) {
-      formErrors.lastNameError = "Invalid lastname";
-    }
-    if (email === "" || !/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/.test(email)) {
-      formErrors.emailError = "invalid email";
-    }
-    if (username === "" || !/^[a-zA-Z0-9_.]+$/.test(username)) {
-      formErrors.usernameError =
-        "Invalid username: username can have only letters, numbers, _ and .";
-    }
-    if (password === "" || !/^(?=.*\d).{8,}$/.test(password)) {
-      formErrors.passwordError =
-        "Password should be atleast 8 characters in length";
-    }
-    if (Object.values(formErrors).some((x) => x !== "")) {
-      return false;
-    }
-    return true;
-  };
-
   const submitHandler = (e) => {
     e.preventDefault();
-    // if (!authValidation()) {
-    //   setFormErrors(formErrors);
-    // } else
     dispatch(signupUser(signUpForm));
   };
 
@@ -94,11 +57,6 @@ export const Signup = () => {
                   onChange={formChangeHandler}
                   required
                 />
-                {formErrors.firstNameError.length > 0 && (
-                  <div className="my-1 text-red-600 font-medium">
-                    {formErrors.firstNameError}
-                  </div>
-                )}
                 <label className="block font-semibold mt-4">
                   Enter Last Name
                 </label>
@@ -111,11 +69,6 @@ export const Signup = () => {
                   onChange={formChangeHandler}
                   required
                 />
-                {formErrors.lastNameError.length > 0 && (
-                  <div className="my-1 text-red-600 font-medium">
-                    {formErrors.lastNameError}
-                  </div>
-                )}
                 <label className="block font-semibold mt-4">Enter Email</label>
                 <input
                   type="email"
@@ -126,11 +79,6 @@ export const Signup = () => {
                   onChange={formChangeHandler}
                   required
                 />
-                {formErrors.emailError.length > 0 && (
-                  <div className="my-1 text-red-600 font-medium">
-                    {formErrors.emailError}
-                  </div>
-                )}
                 <label className="block font-semibold mt-4">
                   Enter Username
                 </label>
@@ -143,11 +91,6 @@ export const Signup = () => {
                   onChange={formChangeHandler}
                   required
                 />
-                {formErrors.usernameError.length > 0 && (
-                  <div className="my-1 text-red-600 font-medium">
-                    {formErrors.usernameError}
-                  </div>
-                )}
                 <label className="block font-semibold mt-4">
                   Enter Password
                 </label>
@@ -172,11 +115,6 @@ export const Signup = () => {
                     ></i>
                   </span>
                 </div>
-                {formErrors.passwordError.length > 0 && (
-                  <div className="my-1 text-red-600 font-medium">
-                    {formErrors.passwordError}
-                  </div>
-                )}
                 {signupError?.length > 0 && (
                   <div className="mt-4 text-center text-red-600 font-medium">
                     {signupError}

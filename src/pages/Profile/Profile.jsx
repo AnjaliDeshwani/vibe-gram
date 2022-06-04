@@ -1,11 +1,6 @@
 import { useDispatch } from "react-redux";
 import { logoutHandler } from "../../reducers/authSlice";
-import {
-  LeftSidebar,
-  RightSidebar,
-  LatestPost,
-  SearchBar,
-} from "../../components";
+import { LeftSidebar, RightSidebar, SearchBar } from "../../components";
 export const Profile = () => {
   const dispatch = useDispatch();
   const logoutClickHandler = () => {
