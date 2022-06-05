@@ -1,9 +1,4 @@
-import {
-  LeftSidebar,
-  RightSidebar,
-  LatestPost,
-  SearchBar,
-} from "../../components";
+import { LeftSidebar, RightSidebar, SearchBar } from "../../components";
 export const Bookmarks = () => {
   return (
     <div className="min-h-screen grid sm:grid-cols-6 lg:grid-cols-10  w-full sm:w-[80%] sm:gap-12 lg:gap-4 mx-auto">
@@ -15,9 +10,7 @@ export const Bookmarks = () => {
             <SearchBar />
           </div>
         </div>
-        {[...Array(8)].map(() => (
-          <LatestPost />
-        ))}
+        Bookmarks Content
       </div>
       <RightSidebar />
     </div>

@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   LeftSidebar,
   RightSidebar,
@@ -5,7 +7,15 @@ import {
   LatestPost,
   SearchBar,
 } from "../../components";
+import { getPosts } from "../../reducers/postSlice";
+
 export const Home = () => {
+  const dispatch = useDispatch();
+  const posts = useSelector((state) => state.posts.allPosts);
+  useEffect(() => {
+    dispatch(getPosts());
+  }, [dispatch]);
+
   return (
     <div className="min-h-screen grid sm:grid-cols-6 lg:grid-cols-10  w-full sm:w-[80%] sm:gap-12 lg:gap-4 mx-auto">
       <LeftSidebar />
@@ -18,8 +28,8 @@ export const Home = () => {
         </div>
         <NewPost />
         <div className="border-b-2 border-b-gray-200 my-2"></div>
-        {[...Array(8)].map(() => (
-          <LatestPost />
+        {posts.map((post) => (
+          <LatestPost post={post} key={post._id} />
         ))}
       </div>
       <RightSidebar />

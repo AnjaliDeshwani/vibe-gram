@@ -18,7 +18,7 @@ export const signupHandler = function (schema, request) {
   const { username, password, ...rest } = JSON.parse(request.requestBody);
   try {
     // check if username already exists
-    const foundUser = schema.users.findBy({ username: username });
+    const foundUser = schema.users.findBy({ username });
     if (foundUser) {
       return new Response(
         422,
