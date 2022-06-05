@@ -1,12 +1,21 @@
-import { getPostDate } from "../../utils";
+import { useEffect, useState } from "react";
+import { getPostDate, getUserFullNameFromUsername } from "../../utils";
+
 export const LatestPost = ({ post }) => {
+  const [name, setName] = useState({ firstName: "", lastName: "" });
+  useEffect(() => {
+    getUserFullNameFromUsername(post.username).then((user) =>
+      setName({ firstName: user.firstName, lastName: user.lastName })
+    );
+  }, []);
+
   return (
     <div className="p-4 border-b-2 border-b-gray-200 grid grid-cols-[4rem,1fr]">
       <div className="bg-red-300 w-12 h-12 rounded-full self-baseline"></div>
       <div className="flex flex-col gap-1 ">
         <div className="flex gap-1">
-          <span className="font-bold tracking-wide">{post.firstName}</span>
-          <span className="font-bold tracking-wide">{post.lastName}</span>
+          <span className="font-bold tracking-wide">{name.firstName}</span>
+          <span className="font-bold tracking-wide">{name.lastName}</span>
           <span className="text-gray-500">@{post.username}</span>
           <span className="text-gray-500">.</span>
           <span className="text-gray-500">{getPostDate(post.createdAt)}</span>
