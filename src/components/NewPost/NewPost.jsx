@@ -13,9 +13,7 @@ export const NewPost = () => {
     setPostData({ ...postData, content: e.target.value });
   };
   const postSubmitHandler = () => {
-    console.log(postData);
-    const response = dispatch(createPost({ postData, token }));
-    console.log("bjcxfdcghj", response);
+    dispatch(createPost({ postData, token }));
     setPostData({ content: "" });
   };
   return (

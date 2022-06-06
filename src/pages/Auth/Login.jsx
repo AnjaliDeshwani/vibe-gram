@@ -18,12 +18,6 @@ export const Login = () => {
     password: "test123",
   };
 
-  // const usernameHandler = (e) => {
-  //   setLoginCred({ ...loginCred, email: e.target.value });
-  // };
-  // const passwordHandler = (e) => {
-  //   setLoginCred({ ...loginCred, password: e.target.value });
-  // };
   const formChangeHandler = (e) => {
     setLoginCred({ ...loginCred, [e.target.name]: e.target.value });
   };

@@ -5,14 +5,15 @@ export const getPostsService = async () => {
 };
 
 export const createPostService = async ({ postData, token }) => {
-  console.log("inside service1");
-  // console.log("content", content);
-  const response = await axios.post(
+  return await axios.post(
     "/api/posts/",
     { postData },
     { headers: { authorization: token } }
   );
-  console.log("inside service2");
-  console.log(response);
-  return response;
+};
+
+export const deletePostService = async ({ postId, token }) => {
+  return await axios.delete(`/api/posts/${postId}`, {
+    headers: { authorization: token },
+  });
 };
