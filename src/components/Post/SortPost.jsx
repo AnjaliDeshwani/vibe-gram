@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 export const SortPost = ({ setSortValue }) => {
   const changeValueHandler = (e) => {
     setSortValue(e.target.value);
