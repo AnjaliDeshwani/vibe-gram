@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   LeftSidebar,
@@ -7,12 +7,17 @@ import {
   LatestPost,
   SearchBar,
   Loader,
+  SortPost,
 } from "../../components";
 import { getPosts } from "../../reducers/postSlice";
+import { useFilteredPosts } from "../../hooks/useFilteredPosts";
 
 export const Home = () => {
   const dispatch = useDispatch();
-  const { allPosts, postsStatus } = useSelector((state) => state.posts);
+  const { postsStatus } = useSelector((state) => state.posts);
+  const [sortValue, setSortValue] = useState("Latest");
+  const posts = useFilteredPosts(sortValue);
+
   useEffect(() => {
     dispatch(getPosts());
   }, [dispatch]);
@@ -33,7 +38,9 @@ export const Home = () => {
             </div>
             <NewPost />
             <div className="border-b-2 border-b-gray-200 my-2"></div>
-            {allPosts.map((post) => (
+            <SortPost setSortValue={setSortValue} />
+            <div className="border-b-2 border-b-gray-200 my-2"></div>
+            {posts.map((post) => (
               <LatestPost post={post} key={post._id} />
             ))}
           </div>

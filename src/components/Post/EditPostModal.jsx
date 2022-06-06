@@ -15,7 +15,6 @@ export const EditPostModal = ({ post, setShowEditModal }) => {
   };
 
   const postChangeHandler = (e) => {
-    console.log("e.target.value", e.target.value);
     setPostData({ ...postData, content: e.target.value });
   };
 
@@ -34,21 +33,29 @@ export const EditPostModal = ({ post, setShowEditModal }) => {
         <div className="grid grid-cols-[3rem,1fr] gap-4 mt-4 justify-center p-4">
           <div className="bg-red-300 w-12 h-12 rounded-full self-baseline"></div>
           <div className="flex-grow flex flex-col gap-4">
-            <input
-              className="text-xl outline-none mt-1.5 bg-transparent break-all w-full break-words"
+            <textarea
+              className="text-xl outline-none mt-1.5 bg-transparent break-all w-full break-words h-36"
               value={postData.content}
               onChange={postChangeHandler}
             />
-            <div className="ml-auto flex items-center gap-4">
+            <div className="flex justify-between items-center gap-4">
               <button>
                 <i className="fa-solid fa-image text-lg"></i>
               </button>
-              <button
-                className="px-4 py-1 text-center font-semibold  rounded-full bg-gradient-to-r from-sky-400 to-cyan-300"
-                onClick={editPostHandler}
-              >
-                Post
-              </button>
+              <div className="flex gap-6">
+                <button
+                  className="px-4 py-1 text-center font-semibold  rounded-full border-2 border-sky-400"
+                  onClick={editPostHandler}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="px-4 py-1 text-center font-semibold  rounded-full bg-gradient-to-r from-sky-400 to-cyan-300"
+                  onClick={editPostHandler}
+                >
+                  Post
+                </button>
+              </div>
             </div>
           </div>
         </div>

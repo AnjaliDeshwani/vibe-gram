@@ -1,8 +1,14 @@
 import { useEffect, useState, useRef } from "react";
-import { getPostDate, getUserFullNameFromUsername } from "../../utils";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getPostDate,
+  getUserFullNameFromUsername,
+  isLikedByCurrentUser,
+} from "../../utils";
 import { PostOptionsModal } from "../Post/PostOptionsModal";
 import { useOnClickOutsideModal } from "../../hooks/useOnClickOutsideModal";
 import { EditPostModal } from "../Post/EditPostModal";
+import { likePost, dislikePost } from "../../reducers/postSlice";
 
 export const LatestPost = ({ post }) => {
   const [name, setName] = useState({ firstName: "", lastName: "" });
@@ -10,9 +16,21 @@ export const LatestPost = ({ post }) => {
   const [showEditModal, setShowEditModal] = useState(false);
   const postRef = useRef();
   const toggleRef = useRef();
+  const dispatch = useDispatch();
+  const { user, token } = useSelector((state) => state.auth);
 
   const toggleModalHandler = () => setShowOptionsModal((prev) => !prev);
+
   useOnClickOutsideModal(postRef, () => setShowOptionsModal(false), toggleRef);
+
+  const isLiked = isLikedByCurrentUser(post, user);
+
+  const likeHandler = () => {
+    isLiked
+      ? dispatch(dislikePost({ postId: post._id, token }))
+      : dispatch(likePost({ postId: post._id, token }));
+  };
+
   useEffect(() => {
     getUserFullNameFromUsername(post.username).then((user) =>
       setName({ firstName: user.firstName, lastName: user.lastName })
@@ -32,16 +50,23 @@ export const LatestPost = ({ post }) => {
         </div>
         <p>{post.content}</p>
         <div className="flex justify-between text-gray-500 w-9/12">
-          <span className="cursor-pointer flex items-center">
-            <i className="fa-regular fa-heart text-lg w-8 h-8 hover:text-black hover:rounded-full hover:bg-opacity-40 flex items-center justify-center"></i>
+          <span
+            className="cursor-pointer flex items-center"
+            onClick={likeHandler}
+          >
+            <i
+              className={`fa-heart text-lg w-8 h-8 hover:bg-gray-400 hover:rounded-full hover:bg-opacity-40 flex items-center justify-center ${
+                isLiked ? "fa-solid text-sky-400" : "fa-regular"
+              }`}
+            ></i>
             <span>{post.likes.likeCount}</span>
           </span>
           <span className="cursor-pointer flex items-center">
-            <i className="fa-regular fa-comment text-lg  w-8 h-8  hover:text-black hover:rounded-full hover:bg-opacity-40 flex items-center justify-center"></i>
+            <i className="fa-regular fa-comment text-lg  w-8 h-8  hover:bg-gray-400 hover:rounded-full hover:bg-opacity-40 flex items-center justify-center"></i>
             <span>{post.comments.length}</span>
           </span>
           <span className="cursor-pointer">
-            <i className="fa-regular fa-bookmark text-lg  w-8 h-8  hover:text-black  hover:rounded-full hover:bg-opacity-40 flex items-center justify-center"></i>
+            <i className="fa-regular fa-bookmark text-lg  w-8 h-8  hover:bg-gray-400  hover:rounded-full hover:bg-opacity-40 flex items-center justify-center"></i>
           </span>
         </div>
       </div>

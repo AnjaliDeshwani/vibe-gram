@@ -19,10 +19,29 @@ export const deletePostService = async ({ postId, token }) => {
 };
 
 export const editPostService = async ({ postId, postData, token }) => {
-  console.log(postData);
   return await axios.post(
     `/api/posts/edit/${postId}`,
     { postData },
+    {
+      headers: { authorization: token },
+    }
+  );
+};
+
+export const likePostService = async ({ postId, token }) => {
+  return await axios.post(
+    `/api/posts/like/${postId}`,
+    {},
+    {
+      headers: { authorization: token },
+    }
+  );
+};
+
+export const dislikePostService = async ({ postId, token }) => {
+  return await axios.post(
+    `/api/posts/dislike/${postId}`,
+    {},
     {
       headers: { authorization: token },
     }
