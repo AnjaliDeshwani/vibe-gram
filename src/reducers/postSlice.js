@@ -3,6 +3,7 @@ import {
   getPostsService,
   createPostService,
   deletePostService,
+  editPostService,
 } from "../services/postService";
 
 const initialState = {
@@ -39,6 +40,18 @@ export const deletePost = createAsyncThunk(
   async ({ postId, token }, thunkAPI) => {
     try {
       const response = await deletePostService({ postId, token });
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const editPost = createAsyncThunk(
+  "posts/editPost",
+  async ({ postId, postData, token }, thunkAPI) => {
+    try {
+      const response = await editPostService({ postId, postData, token });
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -84,6 +97,19 @@ const postSlice = createSlice({
       state.allPosts = action.payload.posts;
     },
     [deletePost.rejected]: (state) => {
+      state.postsStatus = "rejected";
+    },
+
+    //editPost
+    [editPost.pending]: (state) => {
+      state.postsStatus = "loading";
+    },
+    [editPost.fulfilled]: (state, action) => {
+      state.postsStatus = "success";
+      state.allPosts = action.payload.posts;
+      console.log(state.allPosts);
+    },
+    [editPost.rejected]: (state) => {
       state.postsStatus = "rejected";
     },
   },

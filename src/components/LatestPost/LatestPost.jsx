@@ -1,11 +1,13 @@
 import { useEffect, useState, useRef } from "react";
 import { getPostDate, getUserFullNameFromUsername } from "../../utils";
-import { PostModal } from "../PostModal/PostModal";
+import { PostOptionsModal } from "../Post/PostOptionsModal";
 import { useOnClickOutsideModal } from "../../hooks/useOnClickOutsideModal";
+import { EditPostModal } from "../Post/EditPostModal";
 
 export const LatestPost = ({ post }) => {
   const [name, setName] = useState({ firstName: "", lastName: "" });
   const [showOptionsModal, setShowOptionsModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
   const postRef = useRef();
   const toggleRef = useRef();
 
@@ -51,8 +53,21 @@ export const LatestPost = ({ post }) => {
         <i className="fa-solid fa-ellipsis"></i>
       </span>
       <div ref={postRef}>
-        {showOptionsModal && <PostModal post={post} toggleRef={toggleRef} />}
+        {showOptionsModal && (
+          <PostOptionsModal
+            post={post}
+            setShowOptionsModal={setShowOptionsModal}
+            setShowEditModal={setShowEditModal}
+          />
+        )}
       </div>
+      {
+        <div>
+          {showEditModal && (
+            <EditPostModal post={post} setShowEditModal={setShowEditModal} />
+          )}
+        </div>
+      }
     </div>
   );
 };
