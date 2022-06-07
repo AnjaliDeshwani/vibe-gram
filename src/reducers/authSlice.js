@@ -3,7 +3,7 @@ import { loginService, singupService } from "../services/authServices";
 
 const initialState = {
   token: "" || JSON.parse(localStorage.getItem("authDetails"))?.token,
-  user: "" || JSON.parse(localStorage.getItem("authDetails"))?.token,
+  user: "" || JSON.parse(localStorage.getItem("authDetails"))?.user,
   authStatus: "idle",
   loginError: "",
   signupError: "",
