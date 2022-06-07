@@ -4,6 +4,10 @@ export const getPostsService = async () => {
   return await axios.get("/api/posts");
 };
 
+export const getSinglePostService = async (postId) => {
+  return await axios.get(`/api/posts/${postId}`);
+};
+
 export const createPostService = async ({ postData, token }) => {
   return await axios.post(
     "/api/posts/",
@@ -29,21 +33,13 @@ export const editPostService = async ({ postId, postData, token }) => {
 };
 
 export const likePostService = async ({ postId, token }) => {
-  // return await axios.post(
-  //   `/api/posts/like/${postId}`,
-  //   {},
-  //   {
-  //     headers: { authorization: token },
-  //   }
-  // );
-  const response = await axios.post(
+  return await axios.post(
     `/api/posts/like/${postId}`,
     {},
     {
       headers: { authorization: token },
     }
   );
-  return response;
 };
 
 export const dislikePostService = async ({ postId, token }) => {
