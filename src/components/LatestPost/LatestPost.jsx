@@ -7,13 +7,14 @@ import {
 } from "../../utils";
 import { PostOptionsModal } from "../Post/PostOptionsModal";
 import { useOnClickOutsideModal } from "../../hooks/useOnClickOutsideModal";
-import { EditPostModal } from "../Post/EditPostModal";
+import { EditPostModal, CommentModal } from "../Post";
 import { likePost, dislikePost } from "../../reducers/postSlice";
 
 export const LatestPost = ({ post }) => {
   const [name, setName] = useState({ firstName: "", lastName: "" });
   const [showOptionsModal, setShowOptionsModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [showCommentModal, setShowCommentModal] = useState(false);
   const postRef = useRef();
   const toggleRef = useRef();
   const dispatch = useDispatch();
@@ -29,6 +30,10 @@ export const LatestPost = ({ post }) => {
     isLiked
       ? dispatch(dislikePost({ postId: post._id, token }))
       : dispatch(likePost({ postId: post._id, token }));
+  };
+
+  const commentHandler = () => {
+    setShowCommentModal(true);
   };
 
   useEffect(() => {
@@ -61,7 +66,10 @@ export const LatestPost = ({ post }) => {
             ></i>
             <span>{post.likes.likeCount}</span>
           </span>
-          <span className="cursor-pointer flex items-center">
+          <span
+            className="cursor-pointer flex items-center"
+            onClick={commentHandler}
+          >
             <i className="fa-regular fa-comment text-lg  w-8 h-8  hover:bg-gray-400 hover:rounded-full hover:bg-opacity-40 flex items-center justify-center"></i>
             <span>{post.comments.length}</span>
           </span>
@@ -86,13 +94,12 @@ export const LatestPost = ({ post }) => {
           />
         )}
       </div>
-      {
-        <div>
-          {showEditModal && (
-            <EditPostModal post={post} setShowEditModal={setShowEditModal} />
-          )}
-        </div>
-      }
+      {showEditModal && (
+        <EditPostModal post={post} setShowEditModal={setShowEditModal} />
+      )}
+      {showCommentModal && (
+        <CommentModal post={post} setShowCommentModal={setShowCommentModal} />
+      )}
     </div>
   );
 };

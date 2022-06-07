@@ -45,7 +45,7 @@ export const EditPostModal = ({ post, setShowEditModal }) => {
               <div className="flex gap-6">
                 <button
                   className="px-4 py-1 text-center font-semibold  rounded-full border-2 border-sky-400"
-                  onClick={editPostHandler}
+                  onClick={closeEditModal}
                 >
                   Cancel
                 </button>

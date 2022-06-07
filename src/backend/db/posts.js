@@ -75,7 +75,7 @@ export const posts = [
   },
   {
     _id: uuid(),
-    content: "There is nothing impossibl to they who will try",
+    content: "There is nothing impossible to they who will try",
     likes: {
       likeCount: 4,
       likedBy: [],

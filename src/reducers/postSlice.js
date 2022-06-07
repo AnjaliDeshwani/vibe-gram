@@ -6,6 +6,9 @@ import {
   editPostService,
   likePostService,
   dislikePostService,
+  addCommentPostService,
+  editCommentPostService,
+  deleteCommentPostService,
 } from "../services/postService";
 
 const initialState = {
@@ -85,6 +88,50 @@ export const dislikePost = createAsyncThunk(
   }
 );
 
+export const addComment = createAsyncThunk(
+  "posts/addComment",
+  async ({ postId, commentData, token }, thunkAPI) => {
+    try {
+      const response = await addCommentPostService({
+        postId,
+        commentData,
+        token,
+      });
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const editComment = createAsyncThunk(
+  "posts/editComment",
+  async ({ postId, comment, token }, thunkAPI) => {
+    try {
+      const response = await editCommentPostService({ postId, comment, token });
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const deleteComment = createAsyncThunk(
+  "posts/deleteComment",
+  async ({ postId, comment, token }, thunkAPI) => {
+    try {
+      const response = await deleteCommentPostService({
+        postId,
+        comment,
+        token,
+      });
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const postSlice = createSlice({
   name: "posts",
   initialState,
@@ -155,6 +202,17 @@ const postSlice = createSlice({
     },
     [dislikePost.rejected]: (state) => {
       state.postsStatus = "rejected";
+    },
+
+    //comment
+    [addComment.fulfilled]: (state, action) => {
+      state.allPosts = action.payload.posts;
+    },
+    [editComment.fulfilled]: (state, action) => {
+      state.allPosts = action.payload.posts;
+    },
+    [deleteComment.fulfilled]: (state, action) => {
+      state.allPosts = action.payload.posts;
     },
   },
 });

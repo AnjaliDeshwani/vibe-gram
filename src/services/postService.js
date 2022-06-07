@@ -47,3 +47,31 @@ export const dislikePostService = async ({ postId, token }) => {
     }
   );
 };
+
+export const addCommentPostService = async ({ postId, commentData, token }) => {
+  return await axios.post(
+    `/api/comments/add/${postId}`,
+    { commentData },
+    { headers: { authorization: token } }
+  );
+};
+
+export const editCommentPostService = async ({ postId, commentId, token }) => {
+  return await axios.post(
+    `/api/comments/edit/${postId}/${commentId}`,
+    {},
+    { headers: { authorization: token } }
+  );
+};
+
+export const deleteCommentPostService = async ({
+  postId,
+  commentId,
+  token,
+}) => {
+  return await axios.post(
+    `/api/comments/delete/${postId}/${commentId}`,
+    {},
+    { headers: { authorization: token } }
+  );
+};
