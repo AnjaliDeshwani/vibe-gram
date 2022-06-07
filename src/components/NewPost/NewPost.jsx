@@ -32,7 +32,7 @@ export const NewPost = () => {
           </button>
           <button
             className={`px-4 py-1 text-center font-semibold  rounded-full bg-gradient-to-r from-sky-400 to-cyan-300 ${
-              content ? "opacity-100" : "opacity-60"
+              content.trim() ? "opacity-100" : "opacity-60 pointer-events-none"
             }`}
             onClick={postSubmitHandler}
           >
