@@ -9,11 +9,13 @@ import {
   addCommentPostService,
   editCommentPostService,
   deleteCommentPostService,
+  getSinglePostService,
 } from "../services/postService";
 
 const initialState = {
   allPosts: [],
   postsStatus: "",
+  singlePost: "",
 };
 
 export const getPosts = createAsyncThunk(
@@ -21,6 +23,18 @@ export const getPosts = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await getPostsService();
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const getSinglePost = createAsyncThunk(
+  "posts/getSinglePost",
+  async (postId, thunkAPI) => {
+    try {
+      const response = await getSinglePostService(postId);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -146,6 +160,17 @@ const postSlice = createSlice({
       state.allPosts = action.payload.posts;
     },
     [getPosts.rejected]: (state) => {
+      state.postsStatus = "rejected";
+    },
+
+    [getSinglePost.pending]: (state) => {
+      state.postsStatus = "loading";
+    },
+    [getSinglePost.fulfilled]: (state, action) => {
+      state.postsStatus = "success";
+      state.singlePost = action.payload.post;
+    },
+    [getSinglePost.rejected]: (state) => {
       state.postsStatus = "rejected";
     },
 

@@ -1,6 +1,10 @@
 import axios from "axios";
 
-export const getUserByUsername = async (username) => {
+export const getAllUsersService = async () => {
+  return await axios.get("/api/users");
+};
+
+export const getUserByUsernameService = async (username) => {
   return await axios.get(`/api/users/${username}`);
 };
 
@@ -21,6 +25,22 @@ export const addBookmarkPostService = async ({ postId, token }) => {
 export const removePostFromBookmarkService = async ({ postId, token }) => {
   return await axios.post(
     `/api/users/remove-bookmark/${postId}`,
+    {},
+    { headers: { authorization: token } }
+  );
+};
+
+export const followUserService = async ({ followUserId, token }) => {
+  return await axios.post(
+    `/api/users/follow/${followUserId}`,
+    {},
+    { headers: { authorization: token } }
+  );
+};
+
+export const unFollowUserService = async ({ followUserId, token }) => {
+  return await axios.post(
+    `/api/users/unfollow/${followUserId}`,
     {},
     { headers: { authorization: token } }
   );

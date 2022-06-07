@@ -1,10 +1,11 @@
 import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   getPostDate,
-  getUserFullNameFromUsername,
   isLikedByCurrentUser,
   isBokmarkedByCurrentUser,
+  getUserFullNameFromUsername,
 } from "../../utils";
 import { PostOptionsModal } from "../Post/PostOptionsModal";
 import { useOnClickOutsideModal } from "../../hooks/useOnClickOutsideModal";
@@ -25,6 +26,7 @@ export const LatestPost = ({ post }) => {
   const dispatch = useDispatch();
   const { user, token } = useSelector((state) => state.auth);
   const { bookmarks } = useSelector((state) => state.users);
+  const navigate = useNavigate();
 
   const toggleModalHandler = () => setShowOptionsModal((prev) => !prev);
 
@@ -50,6 +52,8 @@ export const LatestPost = ({ post }) => {
       : dispatch(addBookmarkPosts({ postId: post._id, token }));
   };
 
+  const singlePostHandler = () => navigate(`/post/${post._id}`);
+
   useEffect(() => {
     getUserFullNameFromUsername(post.username).then((user) =>
       setName({ firstName: user.firstName, lastName: user.lastName })
@@ -59,15 +63,20 @@ export const LatestPost = ({ post }) => {
   return (
     <div className="relative p-4 border-b-2 border-b-gray-200 grid grid-cols-[4rem,1fr,1rem]">
       <div className="bg-red-300 w-12 h-12 rounded-full self-baseline"></div>
-      <div className="flex flex-col gap-1 ">
-        <div className="flex gap-1">
-          <span className="font-bold tracking-wide">{name.firstName}</span>
-          <span className="font-bold tracking-wide">{name.lastName}</span>
-          <span className="text-gray-500">@{post.username}</span>
-          <span className="text-gray-500">.</span>
-          <span className="text-gray-500">{getPostDate(post.createdAt)}</span>
+      <div className="flex flex-col gap-1">
+        <div
+          className="flex flex-col gap-1 cursor-pointer"
+          onClick={singlePostHandler}
+        >
+          <div className="flex gap-1">
+            <span className="font-bold tracking-wide">{name.firstName}</span>
+            <span className="font-bold tracking-wide">{name.lastName}</span>
+            <span className="text-gray-500">@{post.username}</span>
+            <span className="text-gray-500">.</span>
+            <span className="text-gray-500">{getPostDate(post.createdAt)}</span>
+          </div>
+          <p>{post.content}</p>
         </div>
-        <p>{post.content}</p>
         <div className="flex justify-between text-gray-500 w-9/12">
           <span
             className="cursor-pointer flex items-center"

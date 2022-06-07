@@ -13,7 +13,7 @@ export const SortPost = ({ setSortValue }) => {
         className="font-bold text-xl flex gap-2 items-center"
         onClick={onClickHandler}
       >
-        <i class="fa-solid fa-chart-line"></i>
+        <i className="fa-solid fa-chart-line"></i>
         <span>Trending</span>
       </button>
       <select
