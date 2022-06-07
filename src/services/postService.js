@@ -29,13 +29,21 @@ export const editPostService = async ({ postId, postData, token }) => {
 };
 
 export const likePostService = async ({ postId, token }) => {
-  return await axios.post(
+  // return await axios.post(
+  //   `/api/posts/like/${postId}`,
+  //   {},
+  //   {
+  //     headers: { authorization: token },
+  //   }
+  // );
+  const response = await axios.post(
     `/api/posts/like/${postId}`,
     {},
     {
       headers: { authorization: token },
     }
   );
+  return response;
 };
 
 export const dislikePostService = async ({ postId, token }) => {

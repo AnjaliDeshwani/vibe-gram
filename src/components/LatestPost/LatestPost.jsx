@@ -4,11 +4,16 @@ import {
   getPostDate,
   getUserFullNameFromUsername,
   isLikedByCurrentUser,
+  isBokmarkedByCurrentUser,
 } from "../../utils";
 import { PostOptionsModal } from "../Post/PostOptionsModal";
 import { useOnClickOutsideModal } from "../../hooks/useOnClickOutsideModal";
 import { EditPostModal, CommentModal } from "../Post";
 import { likePost, dislikePost } from "../../reducers/postSlice";
+import {
+  addBookmarkPosts,
+  removePostFromBookmark,
+} from "../../reducers/userSlice";
 
 export const LatestPost = ({ post }) => {
   const [name, setName] = useState({ firstName: "", lastName: "" });
@@ -19,6 +24,7 @@ export const LatestPost = ({ post }) => {
   const toggleRef = useRef();
   const dispatch = useDispatch();
   const { user, token } = useSelector((state) => state.auth);
+  const { bookmarks } = useSelector((state) => state.users);
 
   const toggleModalHandler = () => setShowOptionsModal((prev) => !prev);
 
@@ -34,6 +40,14 @@ export const LatestPost = ({ post }) => {
 
   const commentHandler = () => {
     setShowCommentModal(true);
+  };
+
+  const isBookmarked = isBokmarkedByCurrentUser(post, bookmarks);
+
+  const bookmarkHandler = () => {
+    isBookmarked
+      ? dispatch(removePostFromBookmark({ postId: post._id, token }))
+      : dispatch(addBookmarkPosts({ postId: post._id, token }));
   };
 
   useEffect(() => {
@@ -73,8 +87,12 @@ export const LatestPost = ({ post }) => {
             <i className="fa-regular fa-comment text-lg  w-8 h-8  hover:bg-gray-400 hover:rounded-full hover:bg-opacity-40 flex items-center justify-center"></i>
             <span>{post.comments.length}</span>
           </span>
-          <span className="cursor-pointer">
-            <i className="fa-regular fa-bookmark text-lg  w-8 h-8  hover:bg-gray-400  hover:rounded-full hover:bg-opacity-40 flex items-center justify-center"></i>
+          <span className="cursor-pointer" onClick={bookmarkHandler}>
+            <i
+              className={`fa-bookmark text-lg w-8 h-8 hover:bg-gray-400 hover:rounded-full hover:bg-opacity-40 flex items-center justify-center ${
+                isBookmarked ? "fa-solid text-sky-400" : "fa-regular "
+              }`}
+            ></i>
           </span>
         </div>
       </div>
