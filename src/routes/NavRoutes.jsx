@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Mockman from "mockman-js";
 import { Home, Explore, Bookmarks, Profile, Login, Signup } from "../pages";
 import { PrivateRoute } from "./PrivateRoute";
-import { SinglePost } from "../components/Post/SinglePost";
+import { SinglePost } from "../components/Post/SinglePost/SinglePost";
 
 export const NavRoutes = () => {
   return (

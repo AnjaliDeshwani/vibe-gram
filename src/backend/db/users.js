@@ -42,6 +42,12 @@ export const users = [
         lastName: "Buffay",
         username: "phobe_buffay",
       },
+      {
+        _id: uuid(),
+        firstName: "Ross",
+        lastName: "Geller",
+        username: "ross_geller",
+      },
     ],
   },
   {
@@ -73,6 +79,18 @@ export const users = [
         firstName: "Phobe",
         lastName: "Buffay",
         username: "phobe_buffay",
+      },
+      {
+        _id: uuid(),
+        firstName: "Chandler",
+        lastName: "Bing",
+        username: "chandler_bing",
+      },
+      {
+        _id: uuid(),
+        firstName: "Ross",
+        lastName: "Geller",
+        username: "ross_geller",
       },
     ],
   },

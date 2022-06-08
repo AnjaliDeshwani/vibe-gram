@@ -42,7 +42,8 @@ export const CommentModal = ({ post, setShowCommentModal }) => {
                 Cancel
               </button>
               <button
-                className="px-4 py-1 text-center font-semibold  rounded-full bg-gradient-to-r from-sky-400 to-cyan-300"
+                className="px-4 py-1 text-center font-semibold  rounded-full bg-gradient-to-r from-sky-400 to-cyan-300 disabled:opacity-60"
+                disabled={!commentData.text.trim()}
                 onClick={addPostCommentHandler}
               >
                 Post

@@ -132,11 +132,11 @@ export const editComment = createAsyncThunk(
 
 export const deleteComment = createAsyncThunk(
   "posts/deleteComment",
-  async ({ postId, comment, token }, thunkAPI) => {
+  async ({ postId, commentId, token }, thunkAPI) => {
     try {
       const response = await deleteCommentPostService({
         postId,
-        comment,
+        commentId,
         token,
       });
       return response.data;

@@ -32,7 +32,7 @@ export const LatestPost = ({ post }) => {
 
   useOnClickOutsideModal(postRef, () => setShowOptionsModal(false), toggleRef);
 
-  const isLiked = isLikedByCurrentUser(post, user);
+  const isLiked = isLikedByCurrentUser(post, user, "latest");
 
   const likeHandler = () => {
     isLiked

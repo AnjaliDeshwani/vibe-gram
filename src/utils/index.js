@@ -4,3 +4,4 @@ export { isLikedByCurrentUser } from "./isLikedByCurrentUser";
 export { isBokmarkedByCurrentUser } from "./isBokmarkedByCurrentUser";
 export { isUserFollowAnotherUser } from "./filterUnfollowedUsers";
 export { filterUnfollowedUsers } from "./filterUnfollowedUsers";
+export { setFocusInput } from "./setFocusInput";

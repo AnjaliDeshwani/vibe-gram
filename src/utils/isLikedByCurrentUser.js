@@ -1,5 +1,5 @@
-export const isLikedByCurrentUser = (post, user) => {
-  return post.likes.likedBy.find(
+export const isLikedByCurrentUser = (post, user, from) => {
+  return post.likes?.likedBy?.find(
     (currUser) => currUser.username === user.username
   );
 };
