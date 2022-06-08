@@ -32,7 +32,11 @@ export const SinglePost = () => {
   const toggleRef = useRef();
 
   const newCommentRef = useRef();
-  const { postsStatus, singlePost } = useSelector((state) => state.posts);
+  const {
+    allPosts,
+    postsStatus,
+    singlePost: currentPost,
+  } = useSelector((state) => state.posts);
   const { user, token } = useSelector((state) => state.auth);
   const { bookmarks } = useSelector((state) => state.users);
 
@@ -40,31 +44,33 @@ export const SinglePost = () => {
 
   useOnClickOutsideModal(postRef, () => setShowOptionsModal(false), toggleRef);
 
-  const isLiked = isLikedByCurrentUser(singlePost, user, "singlePost");
+  const isLiked = isLikedByCurrentUser(currentPost, user);
 
   const likeHandler = () => {
     isLiked
-      ? dispatch(dislikePost({ postId: singlePost._id, token }))
-      : dispatch(likePost({ postId: singlePost._id, token }));
+      ? dispatch(dislikePost({ postId: currentPost._id, token }))
+      : dispatch(likePost({ postId: currentPost._id, token }));
   };
 
-  const isBookmarked = isBokmarkedByCurrentUser(singlePost, bookmarks);
+  const isBookmarked = isBokmarkedByCurrentUser(currentPost, bookmarks);
 
   const bookmarkHandler = () => {
     isBookmarked
-      ? dispatch(removePostFromBookmark({ postId: singlePost._id, token }))
-      : dispatch(addBookmarkPosts({ postId: singlePost._id, token }));
+      ? dispatch(removePostFromBookmark({ postId: currentPost._id, token }))
+      : dispatch(addBookmarkPosts({ postId: currentPost._id, token }));
   };
 
   useEffect(() => {
     dispatch(getSinglePost(postId));
-  }, [dispatch, postId]);
+
+    // return () => dispatch(resetSinglePost());
+  }, [dispatch, postId, allPosts]);
 
   useEffect(() => {
-    getUserFullNameFromUsername(singlePost.username).then((user) =>
+    getUserFullNameFromUsername(currentPost.username).then((user) =>
       setName({ firstName: user.firstName, lastName: user.lastName })
     );
-  }, [singlePost.username]);
+  }, [currentPost.username]);
 
   return (
     <>
@@ -83,7 +89,7 @@ export const SinglePost = () => {
                 Posts
               </h2>
             </div>
-            {singlePost ? (
+            {currentPost ? (
               <div className="flex flex-col">
                 <div className="relative p-4 border-b-2 border-b-gray-200 grid grid-cols-[4rem,1fr,1rem]">
                   <div className="bg-red-300 w-12 h-12 rounded-full self-baseline"></div>
@@ -97,14 +103,14 @@ export const SinglePost = () => {
                           {name.lastName}
                         </span>
                         <span className="text-gray-500">
-                          @{singlePost.username}
+                          @{currentPost.username}
                         </span>
                         <span className="text-gray-500">.</span>
                         <span className="text-gray-500">
-                          {getPostDate(singlePost.createdAt)}
+                          {getPostDate(currentPost.createdAt)}
                         </span>
                       </div>
-                      <p>{singlePost.content}</p>
+                      <p>{currentPost.content}</p>
                     </div>
                     <div className="flex justify-between text-gray-500 w-9/12">
                       <span
@@ -116,14 +122,14 @@ export const SinglePost = () => {
                             isLiked ? "fa-solid text-sky-400" : "fa-regular"
                           }`}
                         ></i>
-                        <span>{singlePost.likes.likeCount}</span>
+                        <span>{currentPost.likes.likeCount}</span>
                       </span>
                       <span
                         className="cursor-pointer flex items-center"
                         onClick={() => setFocusInput(newCommentRef)}
                       >
                         <i className="fa-regular fa-comment text-lg  w-8 h-8  hover:bg-gray-400 hover:rounded-full hover:bg-opacity-40 flex items-center justify-center"></i>
-                        <span>{singlePost.comments.length}</span>
+                        <span>{currentPost.comments.length}</span>
                       </span>
                       <span
                         className="cursor-pointer"
@@ -149,7 +155,7 @@ export const SinglePost = () => {
                   <div ref={postRef}>
                     {showOptionsModal && (
                       <PostOptionsModal
-                        post={singlePost}
+                        post={currentPost}
                         setShowOptionsModal={setShowOptionsModal}
                         setShowEditModal={setShowEditModal}
                       />
@@ -158,13 +164,13 @@ export const SinglePost = () => {
                 </div>
 
                 <CommentSection
-                  singlePost={singlePost}
+                  singlePost={currentPost}
                   newCommentRef={newCommentRef}
                 />
 
                 {showEditModal && (
                   <EditPostModal
-                    post={singlePost}
+                    post={currentPost}
                     setShowEditModal={setShowEditModal}
                   />
                 )}

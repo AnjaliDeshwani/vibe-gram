@@ -60,10 +60,15 @@ export const addCommentPostService = async ({ postId, commentData, token }) => {
   );
 };
 
-export const editCommentPostService = async ({ postId, commentId, token }) => {
+export const editCommentPostService = async ({
+  postId,
+  commentId,
+  commentData,
+  token,
+}) => {
   return await axios.post(
     `/api/comments/edit/${postId}/${commentId}`,
-    {},
+    { commentData },
     { headers: { authorization: token } }
   );
 };

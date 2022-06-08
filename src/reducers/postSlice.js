@@ -120,9 +120,14 @@ export const addComment = createAsyncThunk(
 
 export const editComment = createAsyncThunk(
   "posts/editComment",
-  async ({ postId, comment, token }, thunkAPI) => {
+  async ({ postId, commentId, commentData, token }, thunkAPI) => {
     try {
-      const response = await editCommentPostService({ postId, comment, token });
+      const response = await editCommentPostService({
+        postId,
+        commentId,
+        commentData,
+        token,
+      });
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -163,6 +168,7 @@ const postSlice = createSlice({
       state.postsStatus = "rejected";
     },
 
+    //getSinglePost
     [getSinglePost.pending]: (state) => {
       state.postsStatus = "loading";
     },

@@ -1,20 +1,33 @@
 import { useState } from "react";
 import ReactDOM from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addComment } from "../../reducers/postSlice";
+import { addComment, editComment } from "../../reducers/postSlice";
 
-export const CommentModal = ({ post, setShowCommentModal }) => {
-  const [commentData, setCommentData] = useState({ text: "" });
+export const CommentModal = ({ post, setShowCommentModal, comment }) => {
+  const [commentData, setCommentData] = useState({
+    text: comment ? comment.text : "",
+  });
+
   const closeCommentModal = () => setShowCommentModal(false);
   const dispatch = useDispatch();
 
   const { token } = useSelector((state) => state.auth);
 
   const commentChangeHandler = (e) => {
+    e.preventDefault();
     setCommentData({ ...commentData, text: e.target.value });
   };
   const addPostCommentHandler = () => {
-    dispatch(addComment({ postId: post._id, commentData, token }));
+    comment
+      ? dispatch(
+          editComment({
+            postId: post._id,
+            commentId: comment._id,
+            commentData,
+            token,
+          })
+        )
+      : dispatch(addComment({ postId: post._id, commentData, token }));
     closeCommentModal();
   };
 
@@ -24,7 +37,7 @@ export const CommentModal = ({ post, setShowCommentModal }) => {
         className="fixed inset-0 z-50 bg-gray-900 bg-opacity-10"
         onClick={closeCommentModal}
       ></div>
-      <div className="fixed z-50 top-1/4 left-1/4 md:left-[15%] w-[50%] bg-white ring-1 ring-gray-300 shadow-inner py-4 rounded-sm">
+      <div className="fixed z-50 top-1/4 left-1/4  w-[50%] bg-white ring-1 ring-gray-300 shadow-inner py-4 rounded-sm">
         <div className="grid grid-cols-[3rem,1fr] gap-4 mt-4 justify-center p-4">
           <div className="bg-red-300 w-12 h-12 rounded-full self-baseline"></div>
           <div className="flex-grow flex flex-col gap-4">

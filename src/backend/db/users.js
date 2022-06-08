@@ -24,12 +24,6 @@ export const users = [
       },
       {
         _id: uuid(),
-        firstName: "Chandler",
-        lastName: "Bing",
-        username: "chandler_bing",
-      },
-      {
-        _id: uuid(),
         firstName: "Phobe",
         lastName: "Buffay",
         username: "phobe_buffay",
@@ -68,9 +62,9 @@ export const users = [
       },
       {
         _id: uuid(),
-        firstName: "Chandler",
-        lastName: "Bing",
-        username: "chandler_bing",
+        firstName: "Phobe",
+        lastName: "Buffay",
+        username: "phobe_buffay",
       },
     ],
     followers: [

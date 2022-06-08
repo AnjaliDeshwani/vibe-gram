@@ -2,8 +2,11 @@ import { useState, useRef } from "react";
 import { getPostDate } from "../../../utils";
 import { CommentOptionsModal } from "./index";
 import { useOnClickOutsideModal } from "../../../hooks/useOnClickOutsideModal";
+import { CommentModal } from "../CommentModal";
+
 export const CommentCard = ({ singlePost, comment }) => {
   const [showCommentOptionsModal, setShowCommentOptionsModal] = useState(false);
+  const [showEditCommentModal, setShowEditCommentModal] = useState(false);
 
   const commentToggleRef = useRef();
   const commentRef = useRef();
@@ -41,10 +44,18 @@ export const CommentCard = ({ singlePost, comment }) => {
               post={singlePost}
               comment={comment}
               setShowCommentOptionsModal={setShowCommentOptionsModal}
+              setShowEditCommentModal={setShowEditCommentModal}
             />
           )}
         </div>
       </div>
+      {showEditCommentModal && (
+        <CommentModal
+          post={singlePost}
+          setShowCommentModal={setShowEditCommentModal}
+          comment={comment}
+        />
+      )}
     </div>
   );
 };

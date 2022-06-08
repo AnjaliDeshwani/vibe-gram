@@ -8,7 +8,7 @@ export const CommentSection = ({ singlePost, newCommentRef }) => {
   const { comments } = singlePost;
   const [commentData, setCommentData] = useState({ text: "" });
   const dispatch = useDispatch();
-  const { user, token } = useSelector((state) => state.auth);
+  const { token } = useSelector((state) => state.auth);
 
   const commentChangeHandler = (e) => {
     setCommentData({ ...commentData, text: e.target.value });
