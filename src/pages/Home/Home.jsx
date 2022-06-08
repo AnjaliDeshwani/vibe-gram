@@ -15,8 +15,9 @@ import { useFilteredPosts } from "../../hooks/useFilteredPosts";
 export const Home = () => {
   const dispatch = useDispatch();
   const { postsStatus } = useSelector((state) => state.posts);
+  const { user } = useSelector((state) => state.auth);
   const [sortValue, setSortValue] = useState("Latest");
-  const posts = useFilteredPosts(sortValue);
+  const posts = useFilteredPosts(sortValue, user.following);
 
   useEffect(() => {
     dispatch(getPosts());
