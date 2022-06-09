@@ -1,5 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { deletePost } from "../../reducers/postSlice";
+import { followUser, unFollowUser } from "../../reducers/userSlice";
+import { isUserFollowAnotherUser } from "../../utils";
 
 export const PostOptionsModal = ({
   post,
@@ -7,6 +9,7 @@ export const PostOptionsModal = ({
   setShowOptionsModal,
 }) => {
   const { user, token } = useSelector((state) => state.auth);
+  const { allUsers } = useSelector((state) => state.users);
   const { username, _id } = post;
 
   const dispatch = useDispatch();
@@ -17,6 +20,25 @@ export const PostOptionsModal = ({
 
   const editPostHandler = () => {
     setShowEditModal(true);
+    setShowOptionsModal(false);
+  };
+
+  const userToFollow = allUsers.find(
+    (dbUser) => dbUser.username === post.username
+  );
+
+  const loggedInUser = allUsers.find(
+    (dbUser) => dbUser.username === user.username
+  );
+
+  const alreadyFollowing = isUserFollowAnotherUser(
+    userToFollow,
+    loggedInUser.following
+  );
+  const userFollowingHandler = () => {
+    alreadyFollowing
+      ? dispatch(unFollowUser({ followUserId: userToFollow._id, token }))
+      : dispatch(followUser({ followUserId: userToFollow._id, token }));
     setShowOptionsModal(false);
   };
 
@@ -41,9 +63,16 @@ export const PostOptionsModal = ({
         </div>
       ) : (
         <div>
-          <span className="flex gap-3 p-2 items-center cursor-pointer hover:bg-neutral-300 hover:bg-opacity-30">
-            <i className="fa-solid fa-user-xmark"></i>
-            <span>Unfollow</span>
+          <span
+            className="flex gap-3 p-2 items-center cursor-pointer hover:bg-neutral-300 hover:bg-opacity-30"
+            onClick={() => userFollowingHandler()}
+          >
+            <i
+              className={`fa-solid fa-user-${
+                alreadyFollowing ? "xmark" : "plus"
+              }`}
+            ></i>
+            <span>{alreadyFollowing ? "Unfollow" : "Follow"}</span>
           </span>
         </div>
       )}

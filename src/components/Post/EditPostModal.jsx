@@ -34,7 +34,7 @@ export const EditPostModal = ({ post, setShowEditModal }) => {
           <div className="bg-red-300 w-12 h-12 rounded-full self-baseline"></div>
           <div className="flex-grow flex flex-col gap-4">
             <textarea
-              className="text-xl outline-none mt-1.5 bg-transparent break-all w-full break-words h-36"
+              className="text-xl outline-none mt-1.5 bg-transparent break-all w-full break-words h-20"
               value={postData.content}
               onChange={postChangeHandler}
             />
@@ -45,7 +45,7 @@ export const EditPostModal = ({ post, setShowEditModal }) => {
               <div className="flex gap-6">
                 <button
                   className="px-4 py-1 text-center font-semibold  rounded-full border-2 border-sky-400"
-                  onClick={editPostHandler}
+                  onClick={closeEditModal}
                 >
                   Cancel
                 </button>

@@ -11,15 +11,23 @@ import {
 } from "../../components";
 import { getPosts } from "../../reducers/postSlice";
 import { useFilteredPosts } from "../../hooks/useFilteredPosts";
+import { getAllUsers } from "../../reducers/userSlice";
 
 export const Home = () => {
   const dispatch = useDispatch();
   const { postsStatus } = useSelector((state) => state.posts);
+  const { allUsers } = useSelector((state) => state.users);
+  const { user } = useSelector((state) => state.auth);
   const [sortValue, setSortValue] = useState("Latest");
-  const posts = useFilteredPosts(sortValue);
+
+  const loggedInUser = allUsers?.find(
+    (dbUser) => dbUser.username === user.username
+  );
+  const posts = useFilteredPosts(sortValue, loggedInUser?.following);
 
   useEffect(() => {
     dispatch(getPosts());
+    dispatch(getAllUsers());
   }, [dispatch]);
 
   return (

@@ -131,7 +131,8 @@ export const bookmarkPostHandler = function (schema, request) {
         { errors: ["This Post is already bookmarked"] }
       );
     }
-    user.bookmarks.push(post);
+
+    user.bookmarks.push(JSON.parse(JSON.stringify(post)));
     this.db.users.update(
       { _id: user._id },
       { ...user, updatedAt: formatDate() }
@@ -216,7 +217,7 @@ export const followUserHandler = function (schema, request) {
       );
     }
     const isFollowing = user.following.some(
-      (currUser) => currUser._id === followUser._id
+      (currUser) => currUser.username === followUser.username
     );
 
     if (isFollowing) {
@@ -277,7 +278,7 @@ export const unfollowUserHandler = function (schema, request) {
       );
     }
     const isFollowing = user.following.some(
-      (currUser) => currUser._id === followUser._id
+      (currUser) => currUser.username === followUser.username
     );
 
     if (!isFollowing) {
@@ -287,13 +288,13 @@ export const unfollowUserHandler = function (schema, request) {
     const updatedUser = {
       ...user,
       following: user.following.filter(
-        (currUser) => currUser._id !== followUser._id
+        (currUser) => currUser.username !== followUser.username
       ),
     };
     const updatedFollowUser = {
       ...followUser,
       followers: followUser.followers.filter(
-        (currUser) => currUser._id !== user._id
+        (currUser) => currUser.username !== user.username
       ),
     };
     this.db.users.update(
