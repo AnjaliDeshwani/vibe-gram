@@ -32,8 +32,7 @@ export const LatestPost = ({ post }) => {
 
   useOnClickOutsideModal(postRef, () => setShowOptionsModal(false), toggleRef);
 
-  const isLiked = isLikedByCurrentUser(post, user, "latest");
-
+  const isLiked = isLikedByCurrentUser(post, user);
   const likeHandler = () => {
     isLiked
       ? dispatch(dislikePost({ postId: post._id, token }))
@@ -53,6 +52,10 @@ export const LatestPost = ({ post }) => {
   };
 
   const singlePostHandler = () => navigate(`/post/${post._id}`);
+  const userProfileHandler = (e) => {
+    e.stopPropagation();
+    navigate(`/profile/${post.username}`);
+  };
 
   useEffect(() => {
     getUserFullNameFromUsername(post.username).then((user) =>
@@ -62,13 +65,16 @@ export const LatestPost = ({ post }) => {
 
   return (
     <div className="relative p-4 border-b-2 border-b-gray-200 grid grid-cols-[4rem,1fr,1rem]">
-      <div className="bg-red-300 w-12 h-12 rounded-full self-baseline"></div>
+      <div
+        className="bg-red-300 w-12 h-12 rounded-full self-baseline cursor-pointer"
+        onClick={userProfileHandler}
+      ></div>
       <div className="flex flex-col gap-1">
         <div
           className="flex flex-col gap-1 cursor-pointer"
           onClick={singlePostHandler}
         >
-          <div className="flex gap-1">
+          <div className="flex gap-1" onClick={userProfileHandler}>
             <span className="font-bold tracking-wide">{name.firstName}</span>
             <span className="font-bold tracking-wide">{name.lastName}</span>
             <span className="text-gray-500">@{post.username}</span>

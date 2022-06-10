@@ -62,8 +62,6 @@ export const SinglePost = () => {
 
   useEffect(() => {
     dispatch(getSinglePost(postId));
-
-    // return () => dispatch(resetSinglePost());
   }, [dispatch, postId, allPosts]);
 
   useEffect(() => {

@@ -7,6 +7,7 @@ import {
   removePostFromBookmarkService,
   followUserService,
   unFollowUserService,
+  editUserDetailsService,
 } from "../services/userService";
 
 const initialState = {
@@ -33,6 +34,18 @@ export const getSingleUserByUsername = createAsyncThunk(
   async (username, thunkAPI) => {
     try {
       const response = await getUserByUsernameService(username);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const editUserDetails = createAsyncThunk(
+  "users/editUserDetails",
+  async ({ userData, token }, thunkAPI) => {
+    try {
+      const response = await editUserDetailsService({ userData, token });
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -141,6 +154,15 @@ const userSlice = createSlice({
     //getSingleUser
     [getSingleUserByUsername.fulfilled]: (state, action) => {
       state.singleUser = action.payload.user;
+    },
+
+    //editUserDetails
+    [editUserDetails.fulfilled]: (state, action) => {
+      state.allUsers = state.allUsers.map((user) =>
+        user.username === action.payload.user.username
+          ? action.payload.user
+          : user
+      );
     },
 
     //getBookmarks

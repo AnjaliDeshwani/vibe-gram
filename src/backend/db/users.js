@@ -15,6 +15,8 @@ export const users = [
     password: "test123",
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    bio: "Welcome to my world",
+    website: "https://test.tech",
     following: [
       {
         _id: uuid(),
@@ -53,6 +55,8 @@ export const users = [
     password: "anjali123",
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    bio: "Web Developer",
+    website: "anjalideshwani-portfolio.netlify.app/",
     following: [
       {
         _id: uuid(),
@@ -97,8 +101,36 @@ export const users = [
     password: "mark123",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    followers: [],
-    following: [],
+    bio: "What should I put here?",
+    website: "http://dummy.com/",
+    following: [
+      {
+        _id: uuid(),
+        firstName: "Anjali",
+        lastName: "Deshwani",
+        username: "deshwani_anjali",
+      },
+      {
+        _id: uuid(),
+        firstName: "Phobe",
+        lastName: "Buffay",
+        username: "phobe_buffay",
+      },
+    ],
+    followers: [
+      {
+        _id: uuid(),
+        firstName: "Phobe",
+        lastName: "Buffay",
+        username: "phobe_buffay",
+      },
+      {
+        _id: uuid(),
+        firstName: "Ross",
+        lastName: "Geller",
+        username: "ross_geller",
+      },
+    ],
   },
   {
     _id: uuid(),
@@ -109,8 +141,36 @@ export const users = [
     password: "chandler123",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    followers: [],
-    following: [],
+    bio: "What should I put here?",
+    website: "http://dummy.com/",
+    following: [
+      {
+        _id: uuid(),
+        firstName: "Anjali",
+        lastName: "Deshwani",
+        username: "deshwani_anjali",
+      },
+      {
+        _id: uuid(),
+        firstName: "Phobe",
+        lastName: "Buffay",
+        username: "phobe_buffay",
+      },
+    ],
+    followers: [
+      {
+        _id: uuid(),
+        firstName: "Phobe",
+        lastName: "Buffay",
+        username: "phobe_buffay",
+      },
+      {
+        _id: uuid(),
+        firstName: "Ross",
+        lastName: "Geller",
+        username: "ross_geller",
+      },
+    ],
   },
   {
     _id: uuid(),
@@ -121,8 +181,24 @@ export const users = [
     password: "phobe123",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    followers: [],
-    following: [],
+    bio: "What should I put here?",
+    website: "http://dummy.com/",
+    following: [
+      {
+        _id: uuid(),
+        firstName: "Anjali",
+        lastName: "Deshwani",
+        username: "deshwani_anjali",
+      },
+    ],
+    followers: [
+      {
+        _id: uuid(),
+        firstName: "Ross",
+        lastName: "Geller",
+        username: "ross_geller",
+      },
+    ],
   },
   {
     _id: uuid(),
@@ -133,8 +209,36 @@ export const users = [
     password: "monica123",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    followers: [],
-    following: [],
+    bio: "What should I put here?",
+    website: "http://dummy.com/",
+    following: [
+      {
+        _id: uuid(),
+        firstName: "Anjali",
+        lastName: "Deshwani",
+        username: "deshwani_anjali",
+      },
+      {
+        _id: uuid(),
+        firstName: "Phobe",
+        lastName: "Buffay",
+        username: "phobe_buffay",
+      },
+    ],
+    followers: [
+      {
+        _id: uuid(),
+        firstName: "Phobe",
+        lastName: "Buffay",
+        username: "phobe_buffay",
+      },
+      {
+        _id: uuid(),
+        firstName: "Ross",
+        lastName: "Geller",
+        username: "ross_geller",
+      },
+    ],
   },
   {
     _id: uuid(),
@@ -145,7 +249,29 @@ export const users = [
     password: "ross123",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    followers: [],
-    following: [],
+    bio: "What should I put here?",
+    website: "http://dummy.com/",
+    following: [
+      {
+        _id: uuid(),
+        firstName: "Anjali",
+        lastName: "Deshwani",
+        username: "deshwani_anjali",
+      },
+      {
+        _id: uuid(),
+        firstName: "Phobe",
+        lastName: "Buffay",
+        username: "phobe_buffay",
+      },
+    ],
+    followers: [
+      {
+        _id: uuid(),
+        firstName: "Phobe",
+        lastName: "Buffay",
+        username: "phobe_buffay",
+      },
+    ],
   },
 ];
