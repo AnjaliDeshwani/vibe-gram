@@ -19,12 +19,14 @@ export const posts = [
           firstName: "Phobe",
           lastName: "Buffay",
           username: "phobe_buffay",
+          avatarURL: "",
         },
         {
           _id: uuid(),
           firstName: "Ross",
           lastName: "Geller",
           username: "ross_geller",
+          avatarURL: "",
         },
       ],
       dislikedBy: [],
@@ -37,6 +39,7 @@ export const posts = [
         _id: uuid(),
         username: "chandler_bing",
         text: "Interesting",
+        avatarURL: "",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -48,6 +51,7 @@ export const posts = [
         _id: uuid(),
         username: "ross_geller",
         text: "Wow!",
+        avatarURL: "",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -69,18 +73,22 @@ export const posts = [
           firstName: "Chandler",
           lastName: "Bing",
           username: "chandler_bing",
+          avatarURL: "",
         },
         {
           _id: uuid(),
           firstName: "Ross",
           lastName: "Geller",
           username: "ross_geller",
+          avatarURL: "",
         },
         {
           _id: uuid(),
           firstName: "test",
           lastName: "test",
           username: "test_test",
+          avatarURL:
+            "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1654849601/xbgauzp0wzv2czv5kqpo.jpg",
         },
       ],
       dislikedBy: [],
@@ -91,6 +99,7 @@ export const posts = [
         _id: uuid(),
         username: "ross_geller",
         text: "Interesting",
+        avatarURL: "",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -102,6 +111,8 @@ export const posts = [
         _id: uuid(),
         username: "deshwani_anjali",
         text: "Wow!",
+        avatarURL:
+          "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1654851343/images_qin5ab.jpg",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -124,18 +135,22 @@ export const posts = [
           firstName: "Chandler",
           lastName: "Bing",
           username: "chandler_bing",
+          avatarURL: "",
         },
         {
           _id: uuid(),
           firstName: "Ross",
           lastName: "Geller",
           username: "ross_geller",
+          avatarURL: "",
         },
         {
           _id: uuid(),
           firstName: "test",
           lastName: "test",
           username: "test_test",
+          avatarURL:
+            "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1654849601/xbgauzp0wzv2czv5kqpo.jpg",
         },
       ],
       dislikedBy: [],
@@ -146,6 +161,7 @@ export const posts = [
         _id: uuid(),
         username: "chandler_bing",
         text: "Interesting",
+        avatarURL: "",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -157,6 +173,7 @@ export const posts = [
         _id: uuid(),
         username: "ross_geller",
         text: "Wow!",
+        avatarURL: "",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -179,12 +196,14 @@ export const posts = [
           firstName: "Chandler",
           lastName: "Bing",
           username: "chandler_bing",
+          avatarURL: "",
         },
         {
           _id: uuid(),
           firstName: "Ross",
           lastName: "Geller",
           username: "ross_geller",
+          avatarURL: "",
         },
       ],
       dislikedBy: [],
@@ -195,6 +214,7 @@ export const posts = [
         _id: uuid(),
         username: "chandler_bing",
         text: "Interesting",
+        avatarURL: "",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -206,6 +226,7 @@ export const posts = [
         _id: uuid(),
         username: "sohamshah",
         text: "Wow!",
+        avatarURL: "",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -229,12 +250,14 @@ export const posts = [
           firstName: "Chandler",
           lastName: "Bing",
           username: "chandler_bing",
+          avatarURL: "",
         },
         {
           _id: uuid(),
           firstName: "Ross",
           lastName: "Geller",
           username: "ross_geller",
+          avatarURL: "",
         },
       ],
       dislikedBy: [],
@@ -245,6 +268,7 @@ export const posts = [
         _id: uuid(),
         username: "chandler_bing",
         text: "Interesting",
+        avatarURL: "",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -256,6 +280,7 @@ export const posts = [
         _id: uuid(),
         username: "phobe_buffay",
         text: "Wow!",
+        avatarURL: "",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -279,12 +304,14 @@ export const posts = [
           firstName: "Chandler",
           lastName: "Bing",
           username: "chandler_bing",
+          avatarURL: "",
         },
         {
           _id: uuid(),
           firstName: "Ross",
           lastName: "Geller",
           username: "ross_geller",
+          avatarURL: "",
         },
       ],
       dislikedBy: [],
@@ -295,6 +322,7 @@ export const posts = [
         _id: uuid(),
         username: "chandler_bing",
         text: "Interesting",
+        avatarURL: "",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -306,6 +334,7 @@ export const posts = [
         _id: uuid(),
         username: "phobe_buffay",
         text: "Wow!",
+        avatarURL: "",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -378,12 +407,14 @@ export const posts = [
           firstName: "Chandler",
           lastName: "Bing",
           username: "chandler_bing",
+          avatarURL: "",
         },
         {
           _id: uuid(),
           firstName: "Ross",
           lastName: "Geller",
           username: "ross_geller",
+          avatarURL: "",
         },
       ],
       dislikedBy: [],
@@ -394,6 +425,7 @@ export const posts = [
         _id: uuid(),
         username: "chandler_bing",
         text: "Interesting",
+        avatarURL: "",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -405,6 +437,7 @@ export const posts = [
         _id: uuid(),
         username: "phobe_buffay",
         text: "Wow!",
+        avatarURL: "",
         votes: {
           upvotedBy: [],
           downvotedBy: [],

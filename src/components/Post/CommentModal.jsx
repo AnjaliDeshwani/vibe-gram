@@ -2,6 +2,7 @@ import { useState } from "react";
 import ReactDOM from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addComment, editComment } from "../../reducers/postSlice";
+import { UserAvatar } from "../index";
 
 export const CommentModal = ({ post, setShowCommentModal, comment }) => {
   const [commentData, setCommentData] = useState({
@@ -12,11 +13,15 @@ export const CommentModal = ({ post, setShowCommentModal, comment }) => {
   const dispatch = useDispatch();
 
   const { token } = useSelector((state) => state.auth);
+  const { allUsers } = useSelector((state) => state.users);
 
   const commentChangeHandler = (e) => {
     e.preventDefault();
     setCommentData({ ...commentData, text: e.target.value });
   };
+  const currentUser = allUsers?.find(
+    (dbUser) => dbUser.username === post.username
+  );
   const addPostCommentHandler = () => {
     comment
       ? dispatch(
@@ -39,7 +44,7 @@ export const CommentModal = ({ post, setShowCommentModal, comment }) => {
       ></div>
       <div className="fixed z-50 top-1/4 left-1/4  w-[50%] bg-white ring-1 ring-gray-300 shadow-inner py-4 rounded-sm">
         <div className="grid grid-cols-[3rem,1fr] gap-4 mt-4 justify-center p-4">
-          <div className="bg-red-300 w-12 h-12 rounded-full self-baseline"></div>
+          <UserAvatar user={currentUser} />
           <div className="flex-grow flex flex-col gap-4">
             <input
               className="text-xl outline-none mt-1.5 bg-transparent break-all w-full break-words "

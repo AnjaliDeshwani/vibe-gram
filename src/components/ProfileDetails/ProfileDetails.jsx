@@ -5,6 +5,7 @@ import { followUser, unFollowUser } from "../../reducers/userSlice";
 import { isUserFollowAnotherUser } from "../../utils";
 import { EditProfileModal } from "./EditProfileModal";
 import { FollowListModal } from "./FollowListModal";
+import { UserAvatar } from "../index";
 
 export const ProfileDetails = ({ currentUser }) => {
   const { user, token } = useSelector((state) => state.auth);
@@ -50,8 +51,8 @@ export const ProfileDetails = ({ currentUser }) => {
   };
 
   return (
-    <div className="p-4 grid grid-cols-[7rem_1fr] gap-8">
-      <div className="bg-blue-300 w-32 h-32 rounded-full self-baseline"></div>
+    <div className="p-4 grid grid-cols-[8rem_1fr] gap-8">
+      <UserAvatar user={currentUser} profile={true} />
       <div className="flex flex-col gap-4">
         <div className="flex justify-between">
           <div className="flex flex-col">
@@ -93,18 +94,16 @@ export const ProfileDetails = ({ currentUser }) => {
         </a>
         <div className="flex gap-3">
           <span
-            className="hover:underline cursor-pointer"
+            className="hover:underline cursor-pointer font-semibold"
             onClick={() => openFollowModal("Follow")}
           >
-            <span className="font-bold">{followers.length}</span>{" "}
-            <span>Followers</span>
+            <span>{followers.length}</span> <span>Followers</span>
           </span>
           <span
-            className="hover:underline cursor-pointer"
+            className="hover:underline cursor-pointer font-semibold"
             onClick={() => openFollowModal("Following")}
           >
-            <span className="font-semibold">{following.length}</span>{" "}
-            <span>Following</span>
+            <span>{following.length}</span> <span>Following</span>
           </span>
         </div>
       </div>

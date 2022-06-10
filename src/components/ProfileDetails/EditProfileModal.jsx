@@ -2,6 +2,7 @@ import { useState } from "react";
 import ReactDOM from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { editUserDetails } from "../../reducers/userSlice";
+import { UserAvatar } from "../index";
 
 export const EditProfileModal = ({ setEditModal }) => {
   const { allUsers } = useSelector((state) => state.users);
@@ -26,7 +27,7 @@ export const EditProfileModal = ({ setEditModal }) => {
   const closeEditModal = () => {
     setEditModal(false);
   };
-  // event.preventDefault();
+
   const saveEditedDetails = () => {
     dispatch(editUserDetails({ userData: editDetails, token }));
     closeEditModal();
@@ -60,7 +61,7 @@ export const EditProfileModal = ({ setEditModal }) => {
             <label className="edit-profile relative w-max cursor-pointer mx-auto my-2">
               <input type="file" accept="image/*" className="hidden" />
 
-              <div className="bg-red-300 w-24 h-24 rounded-full self-baseline cursor-pointer"></div>
+              <UserAvatar user={loggedInUser} profile={true} />
 
               <i className="fa-solid fa-camera absolute text-md bottom-0 right-0"></i>
             </label>

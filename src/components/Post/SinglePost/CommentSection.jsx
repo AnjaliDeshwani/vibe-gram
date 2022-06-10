@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addComment } from "../../../reducers/postSlice";
-
 import { CommentCard } from "./index";
+import { UserAvatar } from "../../index";
 
-export const CommentSection = ({ singlePost, newCommentRef }) => {
+export const CommentSection = ({ singlePost, newCommentRef, currentUser }) => {
   const { comments } = singlePost;
   const [commentData, setCommentData] = useState({ text: "" });
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ export const CommentSection = ({ singlePost, newCommentRef }) => {
   return (
     <>
       <div className="relative p-2 border-b-2 border-b-gray-200 grid grid-cols-[4rem,1fr,6rem]">
-        <div className="bg-red-300 w-12 h-12 rounded-full self-baseline"></div>
+        <UserAvatar user={currentUser} />
         <input
           type="text"
           required

@@ -1,12 +1,18 @@
 import { useState, useRef } from "react";
+import { useSelector } from "react-redux";
 import { getPostDate } from "../../../utils";
 import { CommentOptionsModal } from "./index";
 import { useOnClickOutsideModal } from "../../../hooks/useOnClickOutsideModal";
 import { CommentModal } from "../CommentModal";
+import { UserAvatar } from "../../index";
 
 export const CommentCard = ({ singlePost, comment }) => {
   const [showCommentOptionsModal, setShowCommentOptionsModal] = useState(false);
   const [showEditCommentModal, setShowEditCommentModal] = useState(false);
+  const { allUsers } = useSelector((state) => state.users);
+  const currentUser = allUsers?.find(
+    (dbUser) => dbUser.username === comment.username
+  );
 
   const commentToggleRef = useRef();
   const commentRef = useRef();
@@ -19,7 +25,7 @@ export const CommentCard = ({ singlePost, comment }) => {
   );
   return (
     <div className=" p-4 border-b-2 border-b-gray-200p-4 grid grid-cols-[4rem,1fr,1rem]">
-      <div className="bg-red-300 w-12 h-12 rounded-full self-baseline"></div>
+      <UserAvatar user={currentUser} />
       <div className="flex flex-col gap-1">
         <div className="flex flex-col gap-1 cursor-pointer">
           <div className="flex gap-1">

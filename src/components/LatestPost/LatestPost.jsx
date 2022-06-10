@@ -15,6 +15,7 @@ import {
   addBookmarkPosts,
   removePostFromBookmark,
 } from "../../reducers/userSlice";
+import { UserAvatar } from "../index";
 
 export const LatestPost = ({ post }) => {
   const [name, setName] = useState({ firstName: "", lastName: "" });
@@ -25,7 +26,7 @@ export const LatestPost = ({ post }) => {
   const toggleRef = useRef();
   const dispatch = useDispatch();
   const { user, token } = useSelector((state) => state.auth);
-  const { bookmarks } = useSelector((state) => state.users);
+  const { allUsers, bookmarks } = useSelector((state) => state.users);
   const navigate = useNavigate();
 
   const toggleModalHandler = () => setShowOptionsModal((prev) => !prev);
@@ -44,6 +45,9 @@ export const LatestPost = ({ post }) => {
   };
 
   const isBookmarked = isBokmarkedByCurrentUser(post, bookmarks);
+  const currentUser = allUsers?.find(
+    (dbUser) => dbUser.username === post.username
+  );
 
   const bookmarkHandler = () => {
     isBookmarked
@@ -65,10 +69,9 @@ export const LatestPost = ({ post }) => {
 
   return (
     <div className="relative p-4 border-b-2 border-b-gray-200 grid grid-cols-[4rem,1fr,1rem]">
-      <div
-        className="bg-red-300 w-12 h-12 rounded-full self-baseline cursor-pointer"
-        onClick={userProfileHandler}
-      ></div>
+      <div onClick={userProfileHandler}>
+        <UserAvatar user={currentUser} />
+      </div>
       <div className="flex flex-col gap-1">
         <div
           className="flex flex-col gap-1 cursor-pointer"

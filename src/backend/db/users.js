@@ -17,12 +17,16 @@ export const users = [
     updatedAt: formatDate(),
     bio: "Welcome to my world",
     website: "https://test.tech",
+    avatarURL:
+      "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1654849601/xbgauzp0wzv2czv5kqpo.jpg",
     following: [
       {
         _id: uuid(),
         firstName: "Anjali",
         lastName: "Deshwani",
         username: "deshwani_anjali",
+        avatarURL:
+          "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1654851343/images_qin5ab.jpg",
       },
       {
         _id: uuid(),
@@ -57,18 +61,22 @@ export const users = [
     updatedAt: formatDate(),
     bio: "Web Developer",
     website: "anjalideshwani-portfolio.netlify.app/",
+    avatarURL:
+      "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1654851343/images_qin5ab.jpg",
     following: [
       {
         _id: uuid(),
         firstName: "Ross",
         lastName: "Geller",
         username: "ross_geller",
+        avatarURL: "",
       },
       {
         _id: uuid(),
         firstName: "Phobe",
         lastName: "Buffay",
         username: "phobe_buffay",
+        avatarURL: "",
       },
     ],
     followers: [
@@ -77,18 +85,22 @@ export const users = [
         firstName: "Phobe",
         lastName: "Buffay",
         username: "phobe_buffay",
+        avatarURL: "",
       },
       {
         _id: uuid(),
         firstName: "Chandler",
         lastName: "Bing",
         username: "chandler_bing",
+        avatarURL:
+          "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1654851785/buikcfn54xbqxdea3ixf.jpg",
       },
       {
         _id: uuid(),
         firstName: "Ross",
         lastName: "Geller",
         username: "ross_geller",
+        avatarURL: "",
       },
     ],
   },
@@ -103,18 +115,23 @@ export const users = [
     updatedAt: formatDate(),
     bio: "What should I put here?",
     website: "http://dummy.com/",
+    avatarURL:
+      "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1654851622/uryrbl2p1lwo4y1ezgs1.jpg",
     following: [
       {
         _id: uuid(),
         firstName: "Anjali",
         lastName: "Deshwani",
         username: "deshwani_anjali",
+        avatarURL:
+          "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1654851343/images_qin5ab.jpg",
       },
       {
         _id: uuid(),
         firstName: "Phobe",
         lastName: "Buffay",
         username: "phobe_buffay",
+        avatarURL: "",
       },
     ],
     followers: [
@@ -123,12 +140,14 @@ export const users = [
         firstName: "Phobe",
         lastName: "Buffay",
         username: "phobe_buffay",
+        avatarURL: "",
       },
       {
         _id: uuid(),
         firstName: "Ross",
         lastName: "Geller",
         username: "ross_geller",
+        avatarURL: "",
       },
     ],
   },
@@ -143,12 +162,16 @@ export const users = [
     updatedAt: formatDate(),
     bio: "What should I put here?",
     website: "http://dummy.com/",
+    avatarURL:
+      "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1654851785/buikcfn54xbqxdea3ixf.jpg",
     following: [
       {
         _id: uuid(),
         firstName: "Anjali",
         lastName: "Deshwani",
         username: "deshwani_anjali",
+        avatarURL:
+          "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1654851343/images_qin5ab.jpg",
       },
       {
         _id: uuid(),
@@ -163,12 +186,14 @@ export const users = [
         firstName: "Phobe",
         lastName: "Buffay",
         username: "phobe_buffay",
+        avatarURL: "",
       },
       {
         _id: uuid(),
         firstName: "Ross",
         lastName: "Geller",
         username: "ross_geller",
+        avatarURL: "",
       },
     ],
   },
@@ -183,12 +208,15 @@ export const users = [
     updatedAt: formatDate(),
     bio: "What should I put here?",
     website: "http://dummy.com/",
+    avatarURL: "",
     following: [
       {
         _id: uuid(),
         firstName: "Anjali",
         lastName: "Deshwani",
         username: "deshwani_anjali",
+        avatarURL:
+          "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1654851343/images_qin5ab.jpg",
       },
     ],
     followers: [
@@ -197,6 +225,7 @@ export const users = [
         firstName: "Ross",
         lastName: "Geller",
         username: "ross_geller",
+        avatarURL: "",
       },
     ],
   },
@@ -211,18 +240,22 @@ export const users = [
     updatedAt: formatDate(),
     bio: "What should I put here?",
     website: "http://dummy.com/",
+    avatarURL: "",
     following: [
       {
         _id: uuid(),
         firstName: "Anjali",
         lastName: "Deshwani",
         username: "deshwani_anjali",
+        avatarURL:
+          "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1654851343/images_qin5ab.jpg",
       },
       {
         _id: uuid(),
         firstName: "Phobe",
         lastName: "Buffay",
         username: "phobe_buffay",
+        avatarURL: "",
       },
     ],
     followers: [
@@ -231,12 +264,14 @@ export const users = [
         firstName: "Phobe",
         lastName: "Buffay",
         username: "phobe_buffay",
+        avatarURL: "",
       },
       {
         _id: uuid(),
         firstName: "Ross",
         lastName: "Geller",
         username: "ross_geller",
+        avatarURL: "",
       },
     ],
   },
@@ -251,18 +286,22 @@ export const users = [
     updatedAt: formatDate(),
     bio: "What should I put here?",
     website: "http://dummy.com/",
+    avatarURL: "",
     following: [
       {
         _id: uuid(),
         firstName: "Anjali",
         lastName: "Deshwani",
         username: "deshwani_anjali",
+        avatarURL:
+          "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1654851343/images_qin5ab.jpg",
       },
       {
         _id: uuid(),
         firstName: "Phobe",
         lastName: "Buffay",
         username: "phobe_buffay",
+        avatarURL: "",
       },
     ],
     followers: [
@@ -271,6 +310,7 @@ export const users = [
         firstName: "Phobe",
         lastName: "Buffay",
         username: "phobe_buffay",
+        avatarURL: "",
       },
     ],
   },

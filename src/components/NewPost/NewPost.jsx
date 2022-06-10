@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createPost } from "../../reducers/postSlice";
+import { UserAvatar } from "../index";
 
 export const NewPost = () => {
   const [postData, setPostData] = useState({
@@ -8,7 +9,7 @@ export const NewPost = () => {
   });
   const { content } = postData;
   const dispatch = useDispatch();
-  const { token } = useSelector((state) => state.auth);
+  const { user, token } = useSelector((state) => state.auth);
   const postHandler = (e) => {
     setPostData({ ...postData, content: e.target.value });
   };
@@ -18,7 +19,7 @@ export const NewPost = () => {
   };
   return (
     <div className="flex gap-2 mt-4 justify-center p-4">
-      <div className="bg-red-300 w-12 h-12 rounded-full self-baseline"></div>
+      <UserAvatar user={user} />
       <div className="flex-grow flex flex-col gap-4">
         <input
           className="text-xl outline-none mt-1.5 bg-transparent break-all w-full"

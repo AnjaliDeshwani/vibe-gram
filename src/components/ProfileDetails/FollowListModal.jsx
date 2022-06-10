@@ -1,5 +1,6 @@
 import ReactDOM from "react-dom";
 import { useNavigate } from "react-router-dom";
+import { UserAvatar } from "../index";
 export const FollowListModal = ({ followModal, setFollowModal }) => {
   const { title, list } = followModal;
   const navigate = useNavigate();
@@ -40,7 +41,7 @@ export const FollowListModal = ({ followModal, setFollowModal }) => {
                   className="flex gap-2 cursor-pointer"
                   onClick={(e) => navigateUserProfile(e, user)}
                 >
-                  <div className="bg-red-300 w-10 h-10 rounded-full self-baseline cursor-pointer"></div>
+                  <UserAvatar user={user} />
                   <div className="flex flex-col -mt-0.5">
                     <span>
                       {user.firstName} {user.lastName}
