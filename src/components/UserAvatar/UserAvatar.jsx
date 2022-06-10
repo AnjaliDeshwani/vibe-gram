@@ -1,13 +1,17 @@
 export const UserAvatar = ({ user, profile }) => {
   const avatar = user?.avatarURL;
 
-  const firstNameInitial = user?.firstName;
-  const lastNameInitial = user?.lastName;
+  const firstNameInitial = user?.firstName[0];
+  const lastNameInitial = user?.lastName[0];
 
-  const userInitials =
-    firstNameInitial &&
-    firstNameInitial[0].toUpperCase() + lastNameInitial &&
-    lastNameInitial[0].toUpperCase();
+  const userInitials = firstNameInitial + lastNameInitial;
+
+  console.log(userInitials);
+  // console.log(
+  //   firstNameInitial &&
+  //     firstNameInitial[0].toUpperCase() + lastNameInitial &&
+  //     lastNameInitial[0].toUpperCase()
+  // );
 
   return (
     <>
