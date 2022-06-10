@@ -1,5 +1,6 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import {
   LeftSidebar,
   RightSidebar,
@@ -8,18 +9,26 @@ import {
   Loader,
   LatestPost,
 } from "../../components";
+import { getAllUsers } from "../../reducers/userSlice";
+import { getPosts } from "../../reducers/postSlice";
 
 export const Profile = () => {
   const { username } = useParams();
   const { allUsers } = useSelector((state) => state.users);
   const { allPosts, postsStatus } = useSelector((state) => state.posts);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const currentUser = allUsers?.find((user) => user.username === username);
   const currentUserPosts = allPosts?.filter(
     (post) => post.username === username
   );
 
+  useEffect(() => {
+    dispatch(getPosts());
+    dispatch(getAllUsers());
+  }, [dispatch]);
+  console.log(postsStatus);
   return (
     <>
       {postsStatus === "loading" ? (
