@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { editUserDetails } from "../../reducers/userSlice";
 import { UserAvatar } from "../index";
 
+const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dkwrbu6qr/image/upload";
+const CLOUDINARY_UPLOAD_PRESET = "pgltbcxc";
+
 export const EditProfileModal = ({ setEditModal }) => {
   const { allUsers } = useSelector((state) => state.users);
   const { user, token } = useSelector((state) => state.auth);
@@ -14,9 +17,11 @@ export const EditProfileModal = ({ setEditModal }) => {
   );
 
   const { firstName, lastName, username } = loggedInUser;
+  const [image, setImage] = useState(null);
   const [editDetails, setEditDetails] = useState({
     bio: loggedInUser.bio,
     website: loggedInUser.website,
+    avatarURL: loggedInUser.avatarURL,
   });
 
   const { bio, website } = editDetails;
@@ -28,8 +33,40 @@ export const EditProfileModal = ({ setEditModal }) => {
     setEditModal(false);
   };
 
+  const imageChangeHandler = (e) => {
+    setImage(e.target.files[0]);
+  };
+
+  const uploadImageFile = () => {
+    const file = image;
+    const formData = new FormData();
+
+    formData.append("file", file);
+    formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+    formData.append("folder", "");
+
+    fetch(CLOUDINARY_URL, {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        return dispatch(
+          editUserDetails({
+            userData: {
+              ...editDetails,
+              avatarURL: data.url,
+            },
+            token,
+          })
+        );
+      })
+      .catch((err) => console.error(err));
+  };
+
   const saveEditedDetails = () => {
-    dispatch(editUserDetails({ userData: editDetails, token }));
+    if (image) uploadImageFile();
+    else dispatch(editUserDetails({ userData: editDetails, token }));
     closeEditModal();
   };
 
@@ -59,9 +96,21 @@ export const EditProfileModal = ({ setEditModal }) => {
             </div>
 
             <label className="edit-profile relative w-max cursor-pointer mx-auto my-2">
-              <input type="file" accept="image/*" className="hidden" />
+              <input
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={imageChangeHandler}
+              />
 
-              <UserAvatar user={loggedInUser} profile={true} />
+              <UserAvatar
+                user={
+                  image
+                    ? { ...loggedInUser, avatarURL: URL.createObjectURL(image) }
+                    : loggedInUser
+                }
+                profile={true}
+              />
 
               <i className="fa-solid fa-camera absolute text-md bottom-0 right-0"></i>
             </label>
