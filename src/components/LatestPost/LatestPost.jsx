@@ -15,8 +15,9 @@ import {
   addBookmarkPosts,
   removePostFromBookmark,
 } from "../../reducers/userSlice";
+import { UserAvatar } from "../index";
 
-export const LatestPost = ({ post }) => {
+export const LatestPost = ({ post, bookmark }) => {
   const [name, setName] = useState({ firstName: "", lastName: "" });
   const [showOptionsModal, setShowOptionsModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -25,15 +26,14 @@ export const LatestPost = ({ post }) => {
   const toggleRef = useRef();
   const dispatch = useDispatch();
   const { user, token } = useSelector((state) => state.auth);
-  const { bookmarks } = useSelector((state) => state.users);
+  const { allUsers, bookmarks } = useSelector((state) => state.users);
   const navigate = useNavigate();
 
   const toggleModalHandler = () => setShowOptionsModal((prev) => !prev);
 
   useOnClickOutsideModal(postRef, () => setShowOptionsModal(false), toggleRef);
 
-  const isLiked = isLikedByCurrentUser(post, user, "latest");
-
+  const isLiked = isLikedByCurrentUser(post, user);
   const likeHandler = () => {
     isLiked
       ? dispatch(dislikePost({ postId: post._id, token }))
@@ -45,6 +45,9 @@ export const LatestPost = ({ post }) => {
   };
 
   const isBookmarked = isBokmarkedByCurrentUser(post, bookmarks);
+  const currentUser = allUsers?.find(
+    (dbUser) => dbUser.username === post.username
+  );
 
   const bookmarkHandler = () => {
     isBookmarked
@@ -53,6 +56,10 @@ export const LatestPost = ({ post }) => {
   };
 
   const singlePostHandler = () => navigate(`/post/${post._id}`);
+  const userProfileHandler = (e) => {
+    e.stopPropagation();
+    navigate(`/profile/${post.username}`);
+  };
 
   useEffect(() => {
     getUserFullNameFromUsername(post.username).then((user) =>
@@ -62,13 +69,15 @@ export const LatestPost = ({ post }) => {
 
   return (
     <div className="relative p-4 border-b-2 border-b-gray-200 grid grid-cols-[4rem,1fr,1rem]">
-      <div className="bg-red-300 w-12 h-12 rounded-full self-baseline"></div>
+      <div onClick={userProfileHandler}>
+        <UserAvatar user={currentUser} />
+      </div>
       <div className="flex flex-col gap-1">
         <div
           className="flex flex-col gap-1 cursor-pointer"
           onClick={singlePostHandler}
         >
-          <div className="flex gap-1">
+          <div className="flex gap-1" onClick={userProfileHandler}>
             <span className="font-bold tracking-wide">{name.firstName}</span>
             <span className="font-bold tracking-wide">{name.lastName}</span>
             <span className="text-gray-500">@{post.username}</span>
@@ -105,13 +114,15 @@ export const LatestPost = ({ post }) => {
           </span>
         </div>
       </div>
-      <span
-        className="cursor-pointer self-start text-center w-6 h-6 hover:bg-gray-400 hover:bg-opacity-30 hover:rounded-full"
-        onClick={toggleModalHandler}
-        ref={toggleRef}
-      >
-        <i className="fa-solid fa-ellipsis"></i>
-      </span>
+      {!bookmark && (
+        <span
+          className="cursor-pointer self-start text-center w-6 h-6 hover:bg-gray-400 hover:bg-opacity-30 hover:rounded-full"
+          onClick={toggleModalHandler}
+          ref={toggleRef}
+        >
+          <i className="fa-solid fa-ellipsis"></i>
+        </span>
+      )}
       <div ref={postRef}>
         {showOptionsModal && (
           <PostOptionsModal

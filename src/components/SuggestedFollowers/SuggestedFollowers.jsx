@@ -1,10 +1,13 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers, followUser } from "../../reducers/userSlice";
+import { useNavigate } from "react-router-dom";
 import { filterUnfollowedUsers } from "../../utils";
+import { UserAvatar } from "../index";
 
 export const SuggestedFollowers = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { allUsers } = useSelector((state) => state.users);
   const { token, user } = useSelector((state) => state.auth);
   const loggedInUser = allUsers.find(
@@ -15,8 +18,13 @@ export const SuggestedFollowers = () => {
     allUsers,
     loggedInUser
   ).slice(0, 4);
+
   const followHandler = (followUserId) => {
     dispatch(followUser({ followUserId, token }));
+  };
+
+  const userProfileHandler = (user) => {
+    navigate(`/profile/${user.username}`);
   };
 
   useEffect(() => {
@@ -30,8 +38,11 @@ export const SuggestedFollowers = () => {
           <div className="flex flex-col gap-10 mt-4">
             {suggestedFollowers.map((user) => (
               <div className="flex gap-1" key={user._id}>
-                <div className="bg-red-300 w-12 h-12 rounded-full"></div>
-                <div className="flex flex-col flex-grow">
+                <UserAvatar user={user} />
+                <div
+                  className="flex flex-col flex-grow cursor-pointer"
+                  onClick={() => userProfileHandler(user)}
+                >
                   <span className="font-bold tracking-wide">
                     {user.firstName} {user.lastName}
                   </span>

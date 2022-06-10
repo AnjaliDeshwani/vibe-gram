@@ -31,7 +31,9 @@ export const Bookmarks = () => {
               </div>
             </div>
             {bookmarks.length ? (
-              bookmarks.map((post) => <LatestPost post={post} key={post._id} />)
+              bookmarks.map((post) => (
+                <LatestPost post={post} key={post._id} bookmark={true} />
+              ))
             ) : (
               <div className="flex justify-center font-semibold text-xl mt-4">
                 No Bookmarks

@@ -8,6 +8,14 @@ export const getUserByUsernameService = async (username) => {
   return await axios.get(`/api/users/${username}`);
 };
 
+export const editUserDetailsService = async ({ userData, token }) => {
+  return await axios.post(
+    `/api/users/edit`,
+    { userData },
+    { headers: { authorization: token } }
+  );
+};
+
 export const getBookmarkPostHandlerService = async (token) => {
   return await axios.get("/api/users/bookmark", {
     headers: { authorization: token },

@@ -19,6 +19,7 @@ import {
   removePostFromBookmark,
 } from "../../../reducers/userSlice";
 import { CommentSection } from "./index";
+import { UserAvatar } from "../../index";
 
 export const SinglePost = () => {
   const dispatch = useDispatch();
@@ -38,7 +39,10 @@ export const SinglePost = () => {
     singlePost: currentPost,
   } = useSelector((state) => state.posts);
   const { user, token } = useSelector((state) => state.auth);
-  const { bookmarks } = useSelector((state) => state.users);
+  const { allUsers, bookmarks } = useSelector((state) => state.users);
+  const currentUser = allUsers?.find(
+    (dbUser) => dbUser.username === currentPost.username
+  );
 
   const toggleModalHandler = () => setShowOptionsModal((prev) => !prev);
 
@@ -52,6 +56,11 @@ export const SinglePost = () => {
       : dispatch(likePost({ postId: currentPost._id, token }));
   };
 
+  const userProfileHandler = (e) => {
+    e.stopPropagation();
+    navigate(`/profile/${currentPost.username}`);
+  };
+
   const isBookmarked = isBokmarkedByCurrentUser(currentPost, bookmarks);
 
   const bookmarkHandler = () => {
@@ -62,8 +71,6 @@ export const SinglePost = () => {
 
   useEffect(() => {
     dispatch(getSinglePost(postId));
-
-    // return () => dispatch(resetSinglePost());
   }, [dispatch, postId, allPosts]);
 
   useEffect(() => {
@@ -92,10 +99,15 @@ export const SinglePost = () => {
             {currentPost ? (
               <div className="flex flex-col">
                 <div className="relative p-4 border-b-2 border-b-gray-200 grid grid-cols-[4rem,1fr,1rem]">
-                  <div className="bg-red-300 w-12 h-12 rounded-full self-baseline"></div>
+                  <div onClick={userProfileHandler}>
+                    <UserAvatar user={currentUser} />
+                  </div>
                   <div className="flex flex-col gap-1">
-                    <div className="flex flex-col gap-1 cursor-pointer">
-                      <div className="flex gap-1">
+                    <div className="flex flex-col gap-1">
+                      <div
+                        className="flex gap-1  cursor-pointer"
+                        onClick={userProfileHandler}
+                      >
                         <span className="font-bold tracking-wide">
                           {name.firstName}
                         </span>

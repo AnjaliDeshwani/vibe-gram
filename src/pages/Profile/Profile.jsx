@@ -1,56 +1,73 @@
-import { useDispatch } from "react-redux";
-import { logoutHandler } from "../../reducers/authSlice";
-import { LeftSidebar, RightSidebar, SearchBar } from "../../components";
+import { useSelector, useDispatch } from "react-redux";
+import { useParams, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import {
+  LeftSidebar,
+  RightSidebar,
+  SearchBar,
+  ProfileDetails,
+  Loader,
+  LatestPost,
+} from "../../components";
+import { getAllUsers } from "../../reducers/userSlice";
+import { getPosts } from "../../reducers/postSlice";
+
 export const Profile = () => {
+  const { username } = useParams();
+  const { allUsers } = useSelector((state) => state.users);
+  const { allPosts, postsStatus } = useSelector((state) => state.posts);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const logoutClickHandler = () => {
-    dispatch(logoutHandler());
-  };
+
+  const currentUser = allUsers?.find((user) => user.username === username);
+  const currentUserPosts = allPosts?.filter(
+    (post) => post.username === username
+  );
+
+  useEffect(() => {
+    dispatch(getPosts());
+    dispatch(getAllUsers());
+  }, [dispatch]);
   return (
-    <div className="min-h-screen grid sm:grid-cols-6 lg:grid-cols-10  w-full sm:w-[80%] sm:gap-12 lg:gap-4 mx-auto">
-      <LeftSidebar />
-      <div className="main-section sm:col-span-5 lg:col-span-5 w-full border-x-2 border-x-gray-200">
-        <div className="flex justify-between items-center border-b-2 border-b-gray-200">
-          <h2 className="font-bold text-xl  p-4">My Profile</h2>
-          <div className="lg:hidden">
-            <SearchBar />
-          </div>
-        </div>
-        <div className="p-4 grid grid-cols-[7rem_1fr] gap-8">
-          <div className="bg-blue-300 w-32 h-32 rounded-full self-baseline"></div>
-          <div className="flex flex-col gap-4">
-            <div className="flex justify-between">
-              <div className="flex flex-col">
-                <span className="font-bold tracking-wide">Charlie Putin</span>
-                <span className="text-gray-500 text-sm">@charlieputin</span>
-              </div>
-              <div className="flex gap-4">
-                <button className="self-baseline font-semibold border-2 border-slate-400 py-1 px-4 rounded-full text-sm hover:bg-slate-200 hover:border-slate-400">
-                  Edit Profile
-                </button>
-                <span className="cursor-pointer" onClick={logoutClickHandler}>
-                  <i className="fa-solid fa-arrow-right-from-bracket"></i>
+    <>
+      {postsStatus === "loading" ? (
+        <Loader />
+      ) : (
+        <div className="md:min-h-screen grid sm:grid-cols-6 lg:grid-cols-10  w-full sm:w-[80%] sm:gap-12 lg:gap-4 mx-auto">
+          <LeftSidebar />
+          <div className="main-section sm:col-span-5 lg:col-span-5 w-full border-x-2 border-x-gray-200">
+            <div className="flex  justify-between  border-b-2 border-b-gray-200">
+              <div className="ml-4 flex items-center">
+                <i
+                  className="fa-solid fa-arrow-left mr-4 cursor-pointer"
+                  onClick={() => navigate(-1)}
+                ></i>
+                <span>
+                  <h2 className="font-bold text-md  md:text-xl">
+                    {currentUser.firstName} {currentUser.lastName}
+                  </h2>
+                  <span>{currentUserPosts.length}</span> <span>Posts</span>
                 </span>
               </div>
+              <div className="lg:hidden">
+                <SearchBar />
+              </div>
             </div>
-            <p className="font-semibold">Hey there, bio in progress</p>
-            <div className="flex gap-3">
-              <span>
-                <span className="font-semibold mr-1">8</span>Posts
-              </span>
-              <span>
-                <span className="font-semibold mr-1">5</span>Followers
-              </span>
-              <span>
-                <span className="font-semibold mr-1">10</span>Following
-              </span>
-            </div>
+            <ProfileDetails currentUser={currentUser} />
+            <div className="border-b-2 border-b-gray-200 my-2"></div>
+            {currentUserPosts.length > 0 ? (
+              currentUserPosts.map((post) => (
+                <LatestPost post={post} key={post._id} />
+              ))
+            ) : (
+              <div className="flex justify-center font-semibold text-xl mt-4">
+                You haven't posted anything yet.
+              </div>
+            )}
           </div>
+          <RightSidebar />
         </div>
-        <div className="border-b-2 border-b-gray-200 my-2"></div>
-        Profile Content
-      </div>
-      <RightSidebar />
-    </div>
+      )}
+    </>
   );
 };

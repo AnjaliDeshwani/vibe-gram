@@ -2,6 +2,7 @@ import { useState } from "react";
 import ReactDOM from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { editPost } from "../../reducers/postSlice";
+import { UserAvatar } from "../index";
 
 export const EditPostModal = ({ post, setShowEditModal }) => {
   const [postData, setPostData] = useState({
@@ -9,6 +10,10 @@ export const EditPostModal = ({ post, setShowEditModal }) => {
   });
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.auth);
+  const { allUsers } = useSelector((state) => state.users);
+  const currentUser = allUsers?.find(
+    (dbUser) => dbUser.username === post.username
+  );
 
   const closeEditModal = () => {
     setShowEditModal(false);
@@ -31,7 +36,7 @@ export const EditPostModal = ({ post, setShowEditModal }) => {
       ></div>
       <div className="fixed z-50 top-1/4 left-1/4 md:left-[15%] w-[70%] bg-white ring-1 ring-gray-300 shadow-inner py-4 rounded-sm">
         <div className="grid grid-cols-[3rem,1fr] gap-4 mt-4 justify-center p-4">
-          <div className="bg-red-300 w-12 h-12 rounded-full self-baseline"></div>
+          <UserAvatar user={currentUser} />
           <div className="flex-grow flex flex-col gap-4">
             <textarea
               className="text-xl outline-none mt-1.5 bg-transparent break-all w-full break-words h-20"

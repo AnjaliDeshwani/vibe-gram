@@ -48,9 +48,13 @@ export const Home = () => {
             <div className="border-b-2 border-b-gray-200 my-2"></div>
             <SortPost setSortValue={setSortValue} />
             <div className="border-b-2 border-b-gray-200 my-2"></div>
-            {posts.map((post) => (
-              <LatestPost post={post} key={post._id} />
-            ))}
+            {posts.length > 0 ? (
+              posts.map((post) => <LatestPost post={post} key={post._id} />)
+            ) : (
+              <div className="flex justify-center font-semibold text-xl mt-4">
+                No Posts to show
+              </div>
+            )}
           </div>
           <RightSidebar />
         </div>

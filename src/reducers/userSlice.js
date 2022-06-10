@@ -7,7 +7,9 @@ import {
   removePostFromBookmarkService,
   followUserService,
   unFollowUserService,
+  editUserDetailsService,
 } from "../services/userService";
+import { toastHandler } from "../utils";
 
 const initialState = {
   allUsers: [],
@@ -33,6 +35,18 @@ export const getSingleUserByUsername = createAsyncThunk(
   async (username, thunkAPI) => {
     try {
       const response = await getUserByUsernameService(username);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const editUserDetails = createAsyncThunk(
+  "users/editUserDetails",
+  async ({ userData, token }, thunkAPI) => {
+    try {
+      const response = await editUserDetailsService({ userData, token });
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -143,6 +157,25 @@ const userSlice = createSlice({
       state.singleUser = action.payload.user;
     },
 
+    //editUserDetails
+    [editUserDetails.pending]: (state) => {
+      state.loadingStatus = "loading";
+    },
+
+    [editUserDetails.fulfilled]: (state, action) => {
+      state.loadingStatus = "success";
+      state.allUsers = state.allUsers.map((user) =>
+        user.username === action.payload.user.username
+          ? action.payload.user
+          : user
+      );
+      toastHandler("success", "Your Profile Updated succesfully");
+    },
+
+    [editUserDetails.rejected]: (state) => {
+      state.loadingStatus = "rejected";
+    },
+
     //getBookmarks
     [getBookmarkPosts.pending]: (state) => {
       state.loadingStatus = "loading";
@@ -158,11 +191,13 @@ const userSlice = createSlice({
     //addBookmark
     [addBookmarkPosts.fulfilled]: (state, action) => {
       state.bookmarks = action.payload.bookmarks;
+      toastHandler("success", "Post Added to Bookmark");
     },
 
     //removeBookmark
     [removePostFromBookmark.fulfilled]: (state, action) => {
       state.bookmarks = action.payload.bookmarks;
+      toastHandler("warn", "Post Removed From Bookmark");
     },
 
     //followUser
@@ -170,6 +205,7 @@ const userSlice = createSlice({
       const { user, followUser } = action.payload;
       state.allUsers = updateFollwingUser(state.allUsers, user);
       state.allUsers = updateFollwedUser(state.allUsers, followUser);
+      toastHandler("success", `${followUser.username} followed`);
     },
 
     //unFollowUser
@@ -177,6 +213,7 @@ const userSlice = createSlice({
       const { user, followUser } = action.payload;
       state.allUsers = updateFollwingUser(state.allUsers, user);
       state.allUsers = updateFollwedUser(state.allUsers, followUser);
+      toastHandler("info", `${followUser.username} unfollowed`);
     },
   },
 });

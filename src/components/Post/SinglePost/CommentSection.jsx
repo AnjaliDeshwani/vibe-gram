@@ -1,14 +1,18 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addComment } from "../../../reducers/postSlice";
-
 import { CommentCard } from "./index";
+import { UserAvatar } from "../../index";
 
 export const CommentSection = ({ singlePost, newCommentRef }) => {
   const { comments } = singlePost;
   const [commentData, setCommentData] = useState({ text: "" });
   const dispatch = useDispatch();
-  const { token } = useSelector((state) => state.auth);
+  const { user, token } = useSelector((state) => state.auth);
+  const { allUsers } = useSelector((state) => state.users);
+  const currentUser = allUsers?.find(
+    (dbUser) => dbUser.username === user.username
+  );
 
   const commentChangeHandler = (e) => {
     setCommentData({ ...commentData, text: e.target.value });
@@ -21,7 +25,7 @@ export const CommentSection = ({ singlePost, newCommentRef }) => {
   return (
     <>
       <div className="relative p-2 border-b-2 border-b-gray-200 grid grid-cols-[4rem,1fr,6rem]">
-        <div className="bg-red-300 w-12 h-12 rounded-full self-baseline"></div>
+        <UserAvatar user={currentUser} />
         <input
           type="text"
           required

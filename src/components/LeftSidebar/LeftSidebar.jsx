@@ -1,5 +1,13 @@
 import { NavLink, Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 export const LeftSidebar = () => {
+  const { allUsers } = useSelector((state) => state.users);
+  const { user } = useSelector((state) => state.auth);
+
+  const loggedInUser = allUsers?.find(
+    (dbUser) => dbUser.username === user.username
+  );
+
   const isActiveLink = ({ isActive }) => {
     return `flex gap-3 cursor-pointer sm:hover:bg-gray-400 sm:hover:bg-opacity-30 py-1 px-3 lg:py-2 lg:px-5 rounded-full ${
       isActive ? "bg-gray-400 bg-opacity-40" : ""
@@ -32,7 +40,10 @@ export const LeftSidebar = () => {
           </span>
           <span className="hidden sm:block">Bookmarks</span>
         </NavLink>
-        <NavLink to="/profile" className={isActiveLink}>
+        <NavLink
+          to={`/profile/${loggedInUser?.username}`}
+          className={isActiveLink}
+        >
           <span>
             <i className="fa-solid fa-user"></i>
           </span>

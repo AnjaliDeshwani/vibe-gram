@@ -15,12 +15,18 @@ export const users = [
     password: "test123",
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    bio: "Welcome to my world",
+    website: "https://test.tech",
+    avatarURL:
+      "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1654849601/xbgauzp0wzv2czv5kqpo.jpg",
     following: [
       {
         _id: uuid(),
         firstName: "Anjali",
         lastName: "Deshwani",
         username: "deshwani_anjali",
+        avatarURL:
+          "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1654851343/images_qin5ab.jpg",
       },
       {
         _id: uuid(),
@@ -53,12 +59,119 @@ export const users = [
     password: "anjali123",
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    bio: "Web Developer",
+    website: "anjalideshwani-portfolio.netlify.app/",
+    avatarURL:
+      "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1654851343/images_qin5ab.jpg",
     following: [
       {
         _id: uuid(),
         firstName: "Ross",
         lastName: "Geller",
         username: "ross_geller",
+        avatarURL: "",
+      },
+      {
+        _id: uuid(),
+        firstName: "Phobe",
+        lastName: "Buffay",
+        username: "phobe_buffay",
+        avatarURL: "",
+      },
+    ],
+    followers: [
+      {
+        _id: uuid(),
+        firstName: "Phobe",
+        lastName: "Buffay",
+        username: "phobe_buffay",
+        avatarURL: "",
+      },
+      {
+        _id: uuid(),
+        firstName: "Chandler",
+        lastName: "Bing",
+        username: "chandler_bing",
+        avatarURL:
+          "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1654851785/buikcfn54xbqxdea3ixf.jpg",
+      },
+      {
+        _id: uuid(),
+        firstName: "Ross",
+        lastName: "Geller",
+        username: "ross_geller",
+        avatarURL: "",
+      },
+    ],
+  },
+  {
+    _id: uuid(),
+    firstName: "Mark",
+    lastName: "Darwin",
+    email: "markdarwin@gmail.com",
+    username: "mark_darwin",
+    password: "mark123",
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
+    bio: "What should I put here?",
+    website: "http://dummy.com/",
+    avatarURL:
+      "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1654851622/uryrbl2p1lwo4y1ezgs1.jpg",
+    following: [
+      {
+        _id: uuid(),
+        firstName: "Anjali",
+        lastName: "Deshwani",
+        username: "deshwani_anjali",
+        avatarURL:
+          "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1654851343/images_qin5ab.jpg",
+      },
+      {
+        _id: uuid(),
+        firstName: "Phobe",
+        lastName: "Buffay",
+        username: "phobe_buffay",
+        avatarURL: "",
+      },
+    ],
+    followers: [
+      {
+        _id: uuid(),
+        firstName: "Phobe",
+        lastName: "Buffay",
+        username: "phobe_buffay",
+        avatarURL: "",
+      },
+      {
+        _id: uuid(),
+        firstName: "Ross",
+        lastName: "Geller",
+        username: "ross_geller",
+        avatarURL: "",
+      },
+    ],
+  },
+  {
+    _id: uuid(),
+    firstName: "Chandler",
+    lastName: "Bing",
+    email: "chandler@gmail.com",
+    username: "chandler_bing",
+    password: "chandler123",
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
+    bio: "What should I put here?",
+    website: "http://dummy.com/",
+    avatarURL:
+      "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1654851785/buikcfn54xbqxdea3ixf.jpg",
+    following: [
+      {
+        _id: uuid(),
+        firstName: "Anjali",
+        lastName: "Deshwani",
+        username: "deshwani_anjali",
+        avatarURL:
+          "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1654851343/images_qin5ab.jpg",
       },
       {
         _id: uuid(),
@@ -73,44 +186,16 @@ export const users = [
         firstName: "Phobe",
         lastName: "Buffay",
         username: "phobe_buffay",
-      },
-      {
-        _id: uuid(),
-        firstName: "Chandler",
-        lastName: "Bing",
-        username: "chandler_bing",
+        avatarURL: "",
       },
       {
         _id: uuid(),
         firstName: "Ross",
         lastName: "Geller",
         username: "ross_geller",
+        avatarURL: "",
       },
     ],
-  },
-  {
-    _id: uuid(),
-    firstName: "Mark",
-    lastName: "Darwin",
-    email: "markdarwin@gmail.com",
-    username: "mark_darwin",
-    password: "mark123",
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
-    followers: [],
-    following: [],
-  },
-  {
-    _id: uuid(),
-    firstName: "Chandler",
-    lastName: "Bing",
-    email: "chandler@gmail.com",
-    username: "chandler_bing",
-    password: "chandler123",
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
-    followers: [],
-    following: [],
   },
   {
     _id: uuid(),
@@ -121,8 +206,28 @@ export const users = [
     password: "phobe123",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    followers: [],
-    following: [],
+    bio: "What should I put here?",
+    website: "http://dummy.com/",
+    avatarURL: "",
+    following: [
+      {
+        _id: uuid(),
+        firstName: "Anjali",
+        lastName: "Deshwani",
+        username: "deshwani_anjali",
+        avatarURL:
+          "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1654851343/images_qin5ab.jpg",
+      },
+    ],
+    followers: [
+      {
+        _id: uuid(),
+        firstName: "Ross",
+        lastName: "Geller",
+        username: "ross_geller",
+        avatarURL: "",
+      },
+    ],
   },
   {
     _id: uuid(),
@@ -133,8 +238,42 @@ export const users = [
     password: "monica123",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    followers: [],
-    following: [],
+    bio: "What should I put here?",
+    website: "http://dummy.com/",
+    avatarURL: "",
+    following: [
+      {
+        _id: uuid(),
+        firstName: "Anjali",
+        lastName: "Deshwani",
+        username: "deshwani_anjali",
+        avatarURL:
+          "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1654851343/images_qin5ab.jpg",
+      },
+      {
+        _id: uuid(),
+        firstName: "Phobe",
+        lastName: "Buffay",
+        username: "phobe_buffay",
+        avatarURL: "",
+      },
+    ],
+    followers: [
+      {
+        _id: uuid(),
+        firstName: "Phobe",
+        lastName: "Buffay",
+        username: "phobe_buffay",
+        avatarURL: "",
+      },
+      {
+        _id: uuid(),
+        firstName: "Ross",
+        lastName: "Geller",
+        username: "ross_geller",
+        avatarURL: "",
+      },
+    ],
   },
   {
     _id: uuid(),
@@ -145,7 +284,34 @@ export const users = [
     password: "ross123",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    followers: [],
-    following: [],
+    bio: "What should I put here?",
+    website: "http://dummy.com/",
+    avatarURL: "",
+    following: [
+      {
+        _id: uuid(),
+        firstName: "Anjali",
+        lastName: "Deshwani",
+        username: "deshwani_anjali",
+        avatarURL:
+          "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1654851343/images_qin5ab.jpg",
+      },
+      {
+        _id: uuid(),
+        firstName: "Phobe",
+        lastName: "Buffay",
+        username: "phobe_buffay",
+        avatarURL: "",
+      },
+    ],
+    followers: [
+      {
+        _id: uuid(),
+        firstName: "Phobe",
+        lastName: "Buffay",
+        username: "phobe_buffay",
+        avatarURL: "",
+      },
+    ],
   },
 ];
