@@ -28,7 +28,6 @@ export const Profile = () => {
     dispatch(getPosts());
     dispatch(getAllUsers());
   }, [dispatch]);
-  console.log(postsStatus);
   return (
     <>
       {postsStatus === "loading" ? (

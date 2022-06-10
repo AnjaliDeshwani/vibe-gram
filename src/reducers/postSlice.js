@@ -11,6 +11,7 @@ import {
   deleteCommentPostService,
   getSinglePostService,
 } from "../services/postService";
+import { toastHandler } from "../utils";
 
 const initialState = {
   allPosts: [],
@@ -187,6 +188,7 @@ const postSlice = createSlice({
     [createPost.fulfilled]: (state, action) => {
       state.postsStatus = "success";
       state.allPosts = action.payload.posts;
+      toastHandler("success", "Post Created");
     },
     [getPosts.rejected]: (state) => {
       state.postsStatus = "rejected";
@@ -199,6 +201,7 @@ const postSlice = createSlice({
     [deletePost.fulfilled]: (state, action) => {
       state.postsStatus = "success";
       state.allPosts = action.payload.posts;
+      toastHandler("error", "Post Deleted");
     },
     [deletePost.rejected]: (state) => {
       state.postsStatus = "rejected";
@@ -211,6 +214,7 @@ const postSlice = createSlice({
     [editPost.fulfilled]: (state, action) => {
       state.postsStatus = "success";
       state.allPosts = action.payload.posts;
+      toastHandler("info", "Post Updated Successfully!");
     },
     [editPost.rejected]: (state) => {
       state.postsStatus = "rejected";
@@ -238,12 +242,15 @@ const postSlice = createSlice({
     //comment
     [addComment.fulfilled]: (state, action) => {
       state.allPosts = action.payload.posts;
+      toastHandler("info", "Comment Added!");
     },
     [editComment.fulfilled]: (state, action) => {
       state.allPosts = action.payload.posts;
+      toastHandler("info", "Comment Updated!");
     },
     [deleteComment.fulfilled]: (state, action) => {
       state.allPosts = action.payload.posts;
+      toastHandler("error", "Comment Deleted!");
     },
   },
 });

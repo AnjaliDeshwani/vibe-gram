@@ -12,7 +12,7 @@ export const CommentModal = ({ post, setShowCommentModal, comment }) => {
   const closeCommentModal = () => setShowCommentModal(false);
   const dispatch = useDispatch();
 
-  const { token } = useSelector((state) => state.auth);
+  const { user, token } = useSelector((state) => state.auth);
   const { allUsers } = useSelector((state) => state.users);
 
   const commentChangeHandler = (e) => {
@@ -20,8 +20,9 @@ export const CommentModal = ({ post, setShowCommentModal, comment }) => {
     setCommentData({ ...commentData, text: e.target.value });
   };
   const currentUser = allUsers?.find(
-    (dbUser) => dbUser.username === post.username
+    (dbUser) => dbUser.username === user.username
   );
+
   const addPostCommentHandler = () => {
     comment
       ? dispatch(

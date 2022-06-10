@@ -4,11 +4,15 @@ import { addComment } from "../../../reducers/postSlice";
 import { CommentCard } from "./index";
 import { UserAvatar } from "../../index";
 
-export const CommentSection = ({ singlePost, newCommentRef, currentUser }) => {
+export const CommentSection = ({ singlePost, newCommentRef }) => {
   const { comments } = singlePost;
   const [commentData, setCommentData] = useState({ text: "" });
   const dispatch = useDispatch();
-  const { token } = useSelector((state) => state.auth);
+  const { user, token } = useSelector((state) => state.auth);
+  const { allUsers } = useSelector((state) => state.users);
+  const currentUser = allUsers?.find(
+    (dbUser) => dbUser.username === user.username
+  );
 
   const commentChangeHandler = (e) => {
     setCommentData({ ...commentData, text: e.target.value });

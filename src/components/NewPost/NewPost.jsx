@@ -10,6 +10,11 @@ export const NewPost = () => {
   const { content } = postData;
   const dispatch = useDispatch();
   const { user, token } = useSelector((state) => state.auth);
+  const { allUsers } = useSelector((state) => state.users);
+  const currentUser = allUsers?.find(
+    (dbUser) => dbUser.username === user.username
+  );
+
   const postHandler = (e) => {
     setPostData({ ...postData, content: e.target.value });
   };
@@ -19,7 +24,7 @@ export const NewPost = () => {
   };
   return (
     <div className="flex gap-2 mt-4 justify-center p-4">
-      <UserAvatar user={user} />
+      <UserAvatar user={currentUser} />
       <div className="flex-grow flex flex-col gap-4">
         <input
           className="text-xl outline-none mt-1.5 bg-transparent break-all w-full"

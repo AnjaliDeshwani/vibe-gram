@@ -178,7 +178,6 @@ export const SinglePost = () => {
                 <CommentSection
                   singlePost={currentPost}
                   newCommentRef={newCommentRef}
-                  currentUser={currentUser}
                 />
 
                 {showEditModal && (

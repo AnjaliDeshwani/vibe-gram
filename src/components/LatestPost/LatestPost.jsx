@@ -17,7 +17,7 @@ import {
 } from "../../reducers/userSlice";
 import { UserAvatar } from "../index";
 
-export const LatestPost = ({ post }) => {
+export const LatestPost = ({ post, bookmark }) => {
   const [name, setName] = useState({ firstName: "", lastName: "" });
   const [showOptionsModal, setShowOptionsModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -114,13 +114,15 @@ export const LatestPost = ({ post }) => {
           </span>
         </div>
       </div>
-      <span
-        className="cursor-pointer self-start text-center w-6 h-6 hover:bg-gray-400 hover:bg-opacity-30 hover:rounded-full"
-        onClick={toggleModalHandler}
-        ref={toggleRef}
-      >
-        <i className="fa-solid fa-ellipsis"></i>
-      </span>
+      {!bookmark && (
+        <span
+          className="cursor-pointer self-start text-center w-6 h-6 hover:bg-gray-400 hover:bg-opacity-30 hover:rounded-full"
+          onClick={toggleModalHandler}
+          ref={toggleRef}
+        >
+          <i className="fa-solid fa-ellipsis"></i>
+        </span>
+      )}
       <div ref={postRef}>
         {showOptionsModal && (
           <PostOptionsModal

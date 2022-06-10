@@ -5,11 +5,11 @@ import { followUser, unFollowUser } from "../../reducers/userSlice";
 import { isUserFollowAnotherUser } from "../../utils";
 import { EditProfileModal } from "./EditProfileModal";
 import { FollowListModal } from "./FollowListModal";
-import { UserAvatar } from "../index";
+import { UserAvatar, Loader } from "../index";
 
 export const ProfileDetails = ({ currentUser }) => {
   const { user, token } = useSelector((state) => state.auth);
-  const { allUsers } = useSelector((state) => state.users);
+  const { allUsers, loadingStatus } = useSelector((state) => state.users);
   const dispatch = useDispatch();
   const [followModal, setFollowModal] = useState({
     show: false,
@@ -51,69 +51,75 @@ export const ProfileDetails = ({ currentUser }) => {
   };
 
   return (
-    <div className="p-4 grid grid-cols-[8rem_1fr] gap-8">
-      <UserAvatar user={currentUser} profile={true} />
-      <div className="flex flex-col gap-4">
-        <div className="flex justify-between">
-          <div className="flex flex-col">
-            <span className="font-bold tracking-wide">
-              {firstName} {lastName}
-            </span>
-            <span className="text-gray-500 text-sm">@{username}</span>
-          </div>
-          {isLoggedInUser ? (
-            <div className="flex gap-4">
-              <button
-                className="self-baseline font-semibold border-2 border-slate-400 py-1 px-4 rounded-full text-sm hover:bg-slate-200 hover:border-slate-400"
-                onClick={openEditModal}
+    <>
+      {loadingStatus === "loading" ? (
+        <Loader />
+      ) : (
+        <div className="p-4 grid grid-cols-[8rem_1fr] gap-8">
+          <UserAvatar user={currentUser} profile={true} />
+          <div className="flex flex-col gap-4">
+            <div className="flex justify-between">
+              <div className="flex flex-col">
+                <span className="font-bold tracking-wide">
+                  {firstName} {lastName}
+                </span>
+                <span className="text-gray-500 text-sm">@{username}</span>
+              </div>
+              {isLoggedInUser ? (
+                <div className="flex gap-4">
+                  <button
+                    className="self-baseline font-semibold border-2 border-slate-400 py-1 px-4 rounded-full text-sm hover:bg-slate-200 hover:border-slate-400"
+                    onClick={openEditModal}
+                  >
+                    Edit Profile
+                  </button>
+                  <span className="cursor-pointer" onClick={logoutClickHandler}>
+                    <i className="fa-solid fa-arrow-right-from-bracket"></i>
+                  </span>
+                </div>
+              ) : (
+                <button
+                  className="self-center px-4 py-1 text-center font-semibold  rounded-full bg-gradient-to-r from-sky-400 to-cyan-300"
+                  onClick={() => userFollowingHandler()}
+                >
+                  {alreadyFollowing ? "Unfollow" : "Follow"}
+                </button>
+              )}
+            </div>
+            <p className="font-semibold">{bio}</p>
+            <a
+              href={website}
+              target="_blank"
+              rel="noreferrer"
+              className="hover:underline text-sky-600"
+            >
+              <i className="fa-solid fa-link mr-1 text-xs"></i>
+              {website}
+            </a>
+            <div className="flex gap-3">
+              <span
+                className="hover:underline cursor-pointer font-semibold"
+                onClick={() => openFollowModal("Follow")}
               >
-                Edit Profile
-              </button>
-              <span className="cursor-pointer" onClick={logoutClickHandler}>
-                <i className="fa-solid fa-arrow-right-from-bracket"></i>
+                <span>{followers.length}</span> <span>Followers</span>
+              </span>
+              <span
+                className="hover:underline cursor-pointer font-semibold"
+                onClick={() => openFollowModal("Following")}
+              >
+                <span>{following.length}</span> <span>Following</span>
               </span>
             </div>
-          ) : (
-            <button
-              className="self-center px-4 py-1 text-center font-semibold  rounded-full bg-gradient-to-r from-sky-400 to-cyan-300"
-              onClick={() => userFollowingHandler()}
-            >
-              {alreadyFollowing ? "Unfollow" : "Follow"}
-            </button>
+          </div>
+          {followModal.show && (
+            <FollowListModal
+              followModal={followModal}
+              setFollowModal={setFollowModal}
+            />
           )}
+          {editModal && <EditProfileModal setEditModal={setEditModal} />}
         </div>
-        <p className="font-semibold">{bio}</p>
-        <a
-          href={website}
-          target="_blank"
-          rel="noreferrer"
-          className="hover:underline text-sky-600"
-        >
-          <i className="fa-solid fa-link mr-1 text-xs"></i>
-          {website}
-        </a>
-        <div className="flex gap-3">
-          <span
-            className="hover:underline cursor-pointer font-semibold"
-            onClick={() => openFollowModal("Follow")}
-          >
-            <span>{followers.length}</span> <span>Followers</span>
-          </span>
-          <span
-            className="hover:underline cursor-pointer font-semibold"
-            onClick={() => openFollowModal("Following")}
-          >
-            <span>{following.length}</span> <span>Following</span>
-          </span>
-        </div>
-      </div>
-      {followModal.show && (
-        <FollowListModal
-          followModal={followModal}
-          setFollowModal={setFollowModal}
-        />
       )}
-      {editModal && <EditProfileModal setEditModal={setEditModal} />}
-    </div>
+    </>
   );
 };

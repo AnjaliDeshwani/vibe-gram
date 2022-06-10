@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers, followUser } from "../../reducers/userSlice";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { filterUnfollowedUsers } from "../../utils";
 import { UserAvatar } from "../index";
 

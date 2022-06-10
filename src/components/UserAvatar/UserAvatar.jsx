@@ -5,7 +5,9 @@ export const UserAvatar = ({ user, profile }) => {
   const lastNameInitial = user?.lastName;
 
   const userInitials =
-    firstNameInitial[0].toUpperCase() + lastNameInitial[0].toUpperCase();
+    firstNameInitial &&
+    firstNameInitial[0].toUpperCase() + lastNameInitial &&
+    lastNameInitial[0].toUpperCase();
 
   return (
     <>
