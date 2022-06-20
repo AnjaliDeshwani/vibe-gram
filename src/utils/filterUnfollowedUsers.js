@@ -1,5 +1,5 @@
 export const isUserFollowAnotherUser = (user, followingArray) => {
-  return followingArray.find(
+  return followingArray?.find(
     (following) => following.username === user.username
   );
 };

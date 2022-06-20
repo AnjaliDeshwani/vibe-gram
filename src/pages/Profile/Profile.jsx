@@ -44,7 +44,7 @@ export const Profile = () => {
                 ></i>
                 <span>
                   <h2 className="font-bold text-md  md:text-xl">
-                    {currentUser.firstName} {currentUser.lastName}
+                    {currentUser?.firstName} {currentUser?.lastName}
                   </h2>
                   <span>{currentUserPosts.length}</span> <span>Posts</span>
                 </span>

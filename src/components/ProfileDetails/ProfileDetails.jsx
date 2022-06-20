@@ -18,17 +18,17 @@ export const ProfileDetails = ({ currentUser }) => {
   });
   const [editModal, setEditModal] = useState(false);
 
-  const isLoggedInUser = currentUser.username === user.username;
+  const isLoggedInUser = currentUser?.username === user?.username;
   const loggedInUser = allUsers.find(
-    (dbUser) => dbUser.username === user.username
+    (dbUser) => dbUser.username === user?.username
   );
 
   const { firstName, lastName, username, bio, website, followers, following } =
-    currentUser;
+    currentUser || "";
 
   const alreadyFollowing = isUserFollowAnotherUser(
     currentUser,
-    loggedInUser.following
+    loggedInUser?.following
   );
 
   const userFollowingHandler = () => {
@@ -101,13 +101,13 @@ export const ProfileDetails = ({ currentUser }) => {
                 className="hover:underline cursor-pointer font-semibold"
                 onClick={() => openFollowModal("Follow")}
               >
-                <span>{followers.length}</span> <span>Followers</span>
+                <span>{followers?.length}</span> <span>Followers</span>
               </span>
               <span
                 className="hover:underline cursor-pointer font-semibold"
                 onClick={() => openFollowModal("Following")}
               >
-                <span>{following.length}</span> <span>Following</span>
+                <span>{following?.length}</span> <span>Following</span>
               </span>
             </div>
           </div>

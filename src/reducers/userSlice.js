@@ -9,13 +9,14 @@ import {
   unFollowUserService,
   editUserDetailsService,
 } from "../services/userService";
-import { toastHandler } from "../utils";
+import { toastHandler, getSearchedUsers } from "../utils";
 
 const initialState = {
   allUsers: [],
   singleUser: {},
   bookmarks: [],
   loadingStatus: "",
+  searchedUsers: [],
 };
 
 export const getAllUsers = createAsyncThunk(
@@ -145,7 +146,14 @@ const updateFollwedUser = (users, followedUser) => {
 const userSlice = createSlice({
   name: "users",
   initialState,
-  reducers: {},
+  reducers: {
+    searchedUsersHandler: (state, action) => {
+      state.searchedUsers = getSearchedUsers(
+        action.payload.searchedText,
+        state.allUsers
+      );
+    },
+  },
   extraReducers: {
     //getAllUsers
     [getAllUsers.fulfilled]: (state, action) => {
@@ -219,3 +227,4 @@ const userSlice = createSlice({
 });
 
 export const userReducer = userSlice.reducer;
+export const { searchedUsersHandler } = userSlice.actions;

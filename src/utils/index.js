@@ -6,3 +6,4 @@ export { isUserFollowAnotherUser } from "./filterUnfollowedUsers";
 export { filterUnfollowedUsers } from "./filterUnfollowedUsers";
 export { setFocusInput } from "./setFocusInput";
 export { toastHandler } from "./toastHandler";
+export { getSearchedUsers } from "./getSearchedUsers";
