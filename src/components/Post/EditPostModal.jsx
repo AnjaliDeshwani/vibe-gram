@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useState } from "react";
 import ReactDOM from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
