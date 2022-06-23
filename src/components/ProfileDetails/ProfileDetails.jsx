@@ -58,7 +58,7 @@ export const ProfileDetails = ({ currentUser }) => {
         <div className="p-4 grid grid-cols-[8rem_1fr] gap-8">
           <UserAvatar user={currentUser} profile={true} />
           <div className="flex flex-col gap-4">
-            <div className="flex justify-between">
+            <div className="flex justify-between flex-col gap-4 md:flex-row">
               <div className="flex flex-col">
                 <span className="font-bold tracking-wide">
                   {firstName} {lastName}
@@ -79,7 +79,7 @@ export const ProfileDetails = ({ currentUser }) => {
                 </div>
               ) : (
                 <button
-                  className="self-center px-4 py-1 text-center font-semibold  rounded-full bg-gradient-to-r from-sky-400 to-cyan-300"
+                  className="self-center px-4 py-1 text-center font-semibold  rounded-full bg-gradient-to-r from-sky-400 to-cyan-300 self-baseline"
                   onClick={() => userFollowingHandler()}
                 >
                   {alreadyFollowing ? "Unfollow" : "Follow"}

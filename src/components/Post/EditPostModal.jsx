@@ -31,9 +31,6 @@ export const EditPostModal = ({ post, setShowEditModal }) => {
     dispatch(editPost({ postId: post._id, postData, token }));
     setShowEditModal(false);
   };
-  useEffect(() => {
-    console.log(postData);
-  }, [postData]);
 
   return ReactDOM.createPortal(
     <>

@@ -33,7 +33,7 @@ export const Profile = () => {
       {postsStatus === "loading" ? (
         <Loader />
       ) : (
-        <div className="md:min-h-screen grid sm:grid-cols-6 lg:grid-cols-10  w-full sm:w-[80%] sm:gap-12 lg:gap-4 mx-auto">
+        <div className="md:min-h-screen sm:grid sm:grid-cols-6 lg:grid-cols-10  w-full sm:w-[80%] sm:gap-12 lg:gap-4 mx-auto">
           <LeftSidebar />
           <div className="main-section sm:col-span-5 lg:col-span-5 w-full border-x-2 border-x-gray-200">
             <div className="flex  justify-between  border-b-2 border-b-gray-200">
@@ -43,7 +43,7 @@ export const Profile = () => {
                   onClick={() => navigate(-1)}
                 ></i>
                 <span>
-                  <h2 className="font-bold text-md  md:text-xl">
+                  <h2 className="font-bold text-md  md:text-xl hidden sm:block">
                     {currentUser?.firstName} {currentUser?.lastName}
                   </h2>
                   <span>{currentUserPosts.length}</span> <span>Posts</span>
