@@ -1,18 +1,18 @@
 import ReactDOM from "react-dom";
 import { useNavigate } from "react-router-dom";
-import { UserAvatar } from "../index";
-export const FollowListModal = ({ followModal, setFollowModal }) => {
-  const { title, list } = followModal;
+import { UserAvatar } from "../../index";
+export const LikePostModal = ({ post, setLikeModal }) => {
   const navigate = useNavigate();
 
-  const closeEditModal = () => {
-    setFollowModal(false);
+  const closeLikeModal = () => {
+    setLikeModal(false);
   };
 
+  const list = post.likes.likedBy;
   const navigateUserProfile = (e, user) => {
     e.stopPropagation();
     navigate(`/profile/${user.username}`);
-    setFollowModal(false);
+    setLikeModal(false);
   };
 
   return ReactDOM.createPortal(
@@ -20,14 +20,14 @@ export const FollowListModal = ({ followModal, setFollowModal }) => {
       <div className="fixed inset-0 z-50 bg-gray-900 bg-opacity-10 "></div>
       <div
         className="h-full w-full fixed z-50  top-0 left-0 flex items-center justify-center"
-        onClick={closeEditModal}
+        onClick={closeLikeModal}
       >
         <div className=" w-80 bg-white ring-1 ring-gray-300 shadow-inner p-4 rounded-sm">
           <div className="flex justify-between users-center mb-4">
-            <div className="text-xl">{title}</div>
+            <div className="text-xl">Liked By</div>
             <button
               className="hover:bg-neutral-300 h-min hover:rounded-full px-2 py-0.5"
-              onClick={closeEditModal}
+              onClick={closeLikeModal}
             >
               <i className="fa-solid fa-times"></i>
             </button>
@@ -53,7 +53,7 @@ export const FollowListModal = ({ followModal, setFollowModal }) => {
                 </div>
               ))
             ) : (
-              <div>Oops! No {title} found</div>
+              <div>Oops! No Likes found</div>
             )}
           </div>
         </div>

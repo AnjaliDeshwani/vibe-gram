@@ -43,7 +43,10 @@ export const CommentModal = ({ post, setShowCommentModal, comment }) => {
         className="fixed inset-0 z-50 bg-gray-900 bg-opacity-10"
         onClick={closeCommentModal}
       ></div>
-      <div className="fixed z-50 top-1/4 left-1/4  w-[50%] bg-white ring-1 ring-gray-300 shadow-inner py-4 rounded-sm">
+      <div
+        className="fixed z-50 top-1/4 left-1/4  w-[50%] bg-white ring-1 ring-gray-300 shadow-inner py-4 rounded-sm"
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="grid grid-cols-[3rem,1fr] gap-4 mt-4 justify-center p-4">
           <UserAvatar user={currentUser} />
           <div className="flex-grow flex flex-col gap-4">

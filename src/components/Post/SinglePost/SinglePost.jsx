@@ -18,7 +18,7 @@ import {
   addBookmarkPosts,
   removePostFromBookmark,
 } from "../../../reducers/userSlice";
-import { CommentSection } from "./index";
+import { CommentSection, LikePostModal } from "./index";
 import { UserAvatar } from "../../index";
 
 export const SinglePost = () => {
@@ -28,6 +28,7 @@ export const SinglePost = () => {
   const [name, setName] = useState({ firstName: "", lastName: "" });
   const [showOptionsModal, setShowOptionsModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [likeModal, setLikeModal] = useState(false);
 
   const postRef = useRef();
   const toggleRef = useRef();
@@ -68,6 +69,8 @@ export const SinglePost = () => {
       ? dispatch(removePostFromBookmark({ postId: currentPost._id, token }))
       : dispatch(addBookmarkPosts({ postId: currentPost._id, token }));
   };
+
+  const showLikeModal = () => setLikeModal(true);
 
   useEffect(() => {
     dispatch(getSinglePost(postId));
@@ -123,18 +126,30 @@ export const SinglePost = () => {
                         </span>
                       </div>
                       <p>{currentPost.content}</p>
+                      {currentPost?.img ? (
+                        <img
+                          src={currentPost?.img}
+                          className="w-full h-auto rounded-md"
+                          alt={currentPost?.imgAlt}
+                        ></img>
+                      ) : null}
                     </div>
                     <div className="flex justify-between text-gray-500 w-9/12">
-                      <span
-                        className="cursor-pointer flex items-center"
-                        onClick={likeHandler}
-                      >
+                      <span className="cursor-pointer flex items-center">
                         <i
                           className={`fa-heart text-lg w-8 h-8 hover:bg-gray-400 hover:rounded-full hover:bg-opacity-40 flex items-center justify-center ${
                             isLiked ? "fa-solid text-sky-400" : "fa-regular"
                           }`}
+                          onClick={likeHandler}
                         ></i>
-                        <span>{currentPost.likes.likeCount}</span>
+                        {currentPost.likes.likeCount > 0 && (
+                          <span
+                            className="hover:underline hover:text-black"
+                            onClick={showLikeModal}
+                          >
+                            {currentPost.likes.likeCount}
+                          </span>
+                        )}
                       </span>
                       <span
                         className="cursor-pointer flex items-center"
@@ -184,6 +199,12 @@ export const SinglePost = () => {
                   <EditPostModal
                     post={currentPost}
                     setShowEditModal={setShowEditModal}
+                  />
+                )}
+                {likeModal && (
+                  <LikePostModal
+                    post={currentPost}
+                    setLikeModal={setLikeModal}
                   />
                 )}
               </div>

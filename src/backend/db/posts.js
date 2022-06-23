@@ -11,6 +11,8 @@ export const posts = [
     _id: uuid(),
     content:
       "As you get older, three things happen. The first is your memory goes, and I can’t remember the other two.",
+    img: null,
+    imgAlt: "",
     likes: {
       likeCount: 2,
       likedBy: [
@@ -65,8 +67,10 @@ export const posts = [
     _id: uuid(),
     content:
       "When I’m in social situations, I always hold onto my glass. It makes me feel comfortable and secure and I don’t have to shake hands. :P",
+    img: null,
+    imgAlt: "",
     likes: {
-      likeCount: 2,
+      likeCount: 3,
       likedBy: [
         {
           _id: uuid(),
@@ -127,8 +131,10 @@ export const posts = [
   {
     _id: uuid(),
     content: "Yeah, well. I don’t try to be awesome. It just comes natural.",
+    img: null,
+    imgAlt: "",
     likes: {
-      likeCount: 4,
+      likeCount: 3,
       likedBy: [
         {
           _id: uuid(),
@@ -188,6 +194,8 @@ export const posts = [
   {
     _id: uuid(),
     content: "It's the imperfections that make things beautiful",
+    img: null,
+    imgAlt: "",
     likes: {
       likeCount: 2,
       likedBy: [
@@ -242,6 +250,8 @@ export const posts = [
     _id: uuid(),
     content:
       "Life is a succession of lessons which must be lived to be understood",
+    img: null,
+    imgAlt: "",
     likes: {
       likeCount: 2,
       likedBy: [
@@ -296,6 +306,8 @@ export const posts = [
     _id: uuid(),
     content:
       "I prefer not to think before speaking. I like being as surprised as everyone else by what comes out of my mouth.",
+    img: null,
+    imgAlt: "",
     likes: {
       likeCount: 2,
       likedBy: [
@@ -399,6 +411,8 @@ export const posts = [
   {
     _id: uuid(),
     content: "Unagi is a total state of awareness.",
+    img: null,
+    imgAlt: "",
     likes: {
       likeCount: 2,
       likedBy: [

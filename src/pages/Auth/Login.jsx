@@ -105,7 +105,7 @@ export const Login = () => {
                   className="flex mt-4 mx-auto border-sky-500 border-2 py-2 px-6 rounded-md hover: bg-gradient-to-r hover:from-sky-500 hover:to-cyan-400 font-semibold"
                   onClick={guestLoginHandler}
                 >
-                  Login with Test Credentials
+                  Login as Guest
                 </button>
               </form>
             </div>

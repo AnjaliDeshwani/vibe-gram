@@ -52,7 +52,7 @@ export const Home = () => {
               posts.map((post) => <LatestPost post={post} key={post._id} />)
             ) : (
               <div className="flex justify-center font-semibold text-xl mt-4">
-                No Posts to show
+                No Posts to show. Follow users to see their posts.
               </div>
             )}
           </div>

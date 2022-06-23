@@ -5,7 +5,6 @@ export const UserAvatar = ({ user, profile }) => {
   const lastNameInitial = user?.lastName[0];
 
   const userInitials = firstNameInitial + lastNameInitial || "";
-  console.log(userInitials);
 
   return (
     <>

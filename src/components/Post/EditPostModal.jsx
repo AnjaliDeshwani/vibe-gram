@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useState } from "react";
 import ReactDOM from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,6 +8,7 @@ import { UserAvatar } from "../index";
 export const EditPostModal = ({ post, setShowEditModal }) => {
   const [postData, setPostData] = useState({
     content: post.content,
+    img: post.img,
   });
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.auth);
@@ -14,6 +16,8 @@ export const EditPostModal = ({ post, setShowEditModal }) => {
   const currentUser = allUsers?.find(
     (dbUser) => dbUser.username === post.username
   );
+
+  const removeImage = () => setPostData({ ...postData, img: null });
 
   const closeEditModal = () => {
     setShowEditModal(false);
@@ -27,6 +31,9 @@ export const EditPostModal = ({ post, setShowEditModal }) => {
     dispatch(editPost({ postId: post._id, postData, token }));
     setShowEditModal(false);
   };
+  useEffect(() => {
+    console.log(postData);
+  }, [postData]);
 
   return ReactDOM.createPortal(
     <>
@@ -34,7 +41,10 @@ export const EditPostModal = ({ post, setShowEditModal }) => {
         className="fixed inset-0 z-50 bg-gray-900 bg-opacity-10"
         onClick={closeEditModal}
       ></div>
-      <div className="fixed z-50 top-1/4 left-1/4 md:left-[15%] w-[70%] bg-white ring-1 ring-gray-300 shadow-inner py-4 rounded-sm">
+      <div
+        className="fixed z-50 top-1/4 left-1/4 md:left-[15%] w-[70%] bg-white ring-1 ring-gray-300 shadow-inner py-4 rounded-sm"
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="grid grid-cols-[3rem,1fr] gap-4 mt-4 justify-center p-4">
           <UserAvatar user={currentUser} />
           <div className="flex-grow flex flex-col gap-4">
@@ -43,9 +53,25 @@ export const EditPostModal = ({ post, setShowEditModal }) => {
               value={postData.content}
               onChange={postChangeHandler}
             />
+            {postData.img ? (
+              <div className="relative">
+                <img
+                  src={postData.img}
+                  className="w-full h-auto rounded-md"
+                  alt="demo"
+                />
+                <button
+                  type="button"
+                  className="absolute top-1 left-2 text-lg"
+                  onClick={removeImage}
+                >
+                  <i className="fa-solid fa-square-xmark"></i>
+                </button>
+              </div>
+            ) : null}
             <div className="flex justify-between items-center gap-4">
               <button>
-                <i className="fa-solid fa-image text-lg"></i>
+                {/* <i className="fa-solid fa-image text-lg"></i> */}
               </button>
               <div className="flex gap-6">
                 <button

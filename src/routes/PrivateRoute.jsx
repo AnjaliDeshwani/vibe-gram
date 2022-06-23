@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { Navigate, useLocation, Outlet } from "react-router-dom";
-export const PrivateRoute = ({ children }) => {
+export const PrivateRoute = () => {
   const token = useSelector((state) => state.auth.token);
   const location = useLocation();
 

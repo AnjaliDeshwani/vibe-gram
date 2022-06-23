@@ -11,7 +11,13 @@ import { getBookmarkPosts } from "../../reducers/userSlice";
 
 export const Bookmarks = () => {
   const { bookmarks, loadingStatus } = useSelector((state) => state.users);
+  const { allPosts } = useSelector((state) => state.posts);
   const dispatch = useDispatch();
+
+  const bookMarkedPosts = allPosts.filter((dbPost) =>
+    bookmarks.find((bookmark) => bookmark === dbPost._id)
+  );
+
   useEffect(() => {
     dispatch(getBookmarkPosts());
   }, [dispatch]);
@@ -30,8 +36,8 @@ export const Bookmarks = () => {
                 <SearchBar />
               </div>
             </div>
-            {bookmarks.length ? (
-              bookmarks.map((post) => (
+            {bookMarkedPosts.length ? (
+              bookMarkedPosts.map((post) => (
                 <LatestPost post={post} key={post._id} bookmark={true} />
               ))
             ) : (

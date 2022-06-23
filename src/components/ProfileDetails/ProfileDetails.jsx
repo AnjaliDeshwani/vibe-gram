@@ -86,20 +86,22 @@ export const ProfileDetails = ({ currentUser }) => {
                 </button>
               )}
             </div>
-            <p className="font-semibold">{bio}</p>
-            <a
-              href={website}
-              target="_blank"
-              rel="noreferrer"
-              className="hover:underline text-sky-600"
-            >
-              <i className="fa-solid fa-link mr-1 text-xs"></i>
-              {website}
-            </a>
+            {bio && <p className="font-semibold">{bio}</p>}
+            {website && (
+              <a
+                href={website}
+                target="_blank"
+                rel="noreferrer"
+                className="hover:underline text-sky-600"
+              >
+                <i className="fa-solid fa-link mr-1 text-xs"></i>
+                {website}
+              </a>
+            )}
             <div className="flex gap-3">
               <span
                 className="hover:underline cursor-pointer font-semibold"
-                onClick={() => openFollowModal("Follow")}
+                onClick={() => openFollowModal("Followers")}
               >
                 <span>{followers?.length}</span> <span>Followers</span>
               </span>

@@ -29,18 +29,23 @@ export const LatestPost = ({ post, bookmark }) => {
   const { allUsers, bookmarks } = useSelector((state) => state.users);
   const navigate = useNavigate();
 
-  const toggleModalHandler = () => setShowOptionsModal((prev) => !prev);
+  const toggleModalHandler = (e) => {
+    e.stopPropagation();
+    setShowOptionsModal((prev) => !prev);
+  };
 
   useOnClickOutsideModal(postRef, () => setShowOptionsModal(false), toggleRef);
 
   const isLiked = isLikedByCurrentUser(post, user);
-  const likeHandler = () => {
+  const likeHandler = (e) => {
+    e.stopPropagation();
     isLiked
       ? dispatch(dislikePost({ postId: post._id, token }))
       : dispatch(likePost({ postId: post._id, token }));
   };
 
-  const commentHandler = () => {
+  const commentHandler = (e) => {
+    e.stopPropagation();
     setShowCommentModal(true);
   };
 
@@ -49,7 +54,8 @@ export const LatestPost = ({ post, bookmark }) => {
     (dbUser) => dbUser.username === post.username
   );
 
-  const bookmarkHandler = () => {
+  const bookmarkHandler = (e) => {
+    e.stopPropagation();
     isBookmarked
       ? dispatch(removePostFromBookmark({ postId: post._id, token }))
       : dispatch(addBookmarkPosts({ postId: post._id, token }));
@@ -68,15 +74,15 @@ export const LatestPost = ({ post, bookmark }) => {
   }, [post.username]);
 
   return (
-    <div className="relative p-4 border-b-2 border-b-gray-200 grid grid-cols-[4rem,1fr,1rem]">
+    <div
+      className="relative p-4 border-b-2 border-b-gray-200 grid grid-cols-[4rem,1fr,1rem]"
+      onClick={singlePostHandler}
+    >
       <div onClick={userProfileHandler}>
         <UserAvatar user={currentUser} />
       </div>
       <div className="flex flex-col gap-1">
-        <div
-          className="flex flex-col gap-1 cursor-pointer"
-          onClick={singlePostHandler}
-        >
+        <div className="flex flex-col gap-1 cursor-pointer">
           <div className="flex gap-1" onClick={userProfileHandler}>
             <span className="font-bold tracking-wide">{name.firstName}</span>
             <span className="font-bold tracking-wide">{name.lastName}</span>
@@ -85,24 +91,29 @@ export const LatestPost = ({ post, bookmark }) => {
             <span className="text-gray-500">{getPostDate(post.createdAt)}</span>
           </div>
           <p>{post.content}</p>
+          {post?.img ? (
+            <img
+              src={post?.img}
+              className="w-full h-auto rounded-md"
+              alt={post?.imgAlt}
+            ></img>
+          ) : null}
         </div>
         <div className="flex justify-between text-gray-500 w-9/12">
-          <span
-            className="cursor-pointer flex items-center"
-            onClick={likeHandler}
-          >
+          <span className="cursor-pointer flex items-center">
             <i
               className={`fa-heart text-lg w-8 h-8 hover:bg-gray-400 hover:rounded-full hover:bg-opacity-40 flex items-center justify-center ${
                 isLiked ? "fa-solid text-sky-400" : "fa-regular"
               }`}
+              onClick={likeHandler}
             ></i>
             <span>{post.likes.likeCount}</span>
           </span>
-          <span
-            className="cursor-pointer flex items-center"
-            onClick={commentHandler}
-          >
-            <i className="fa-regular fa-comment text-lg  w-8 h-8  hover:bg-gray-400 hover:rounded-full hover:bg-opacity-40 flex items-center justify-center"></i>
+          <span className="cursor-pointer flex items-center">
+            <i
+              className="fa-regular fa-comment text-lg  w-8 h-8  hover:bg-gray-400 hover:rounded-full hover:bg-opacity-40 flex items-center justify-center"
+              onClick={commentHandler}
+            ></i>
             <span>{post.comments.length}</span>
           </span>
           <span className="cursor-pointer" onClick={bookmarkHandler}>
