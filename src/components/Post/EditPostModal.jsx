@@ -53,7 +53,7 @@ export const EditPostModal = ({ post, setShowEditModal }) => {
               <div className="relative">
                 <img
                   src={postData.img}
-                  className="w-full h-auto rounded-md"
+                  className="w-80 h-auto rounded-md"
                   alt="demo"
                 />
                 <button
