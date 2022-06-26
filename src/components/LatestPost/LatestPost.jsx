@@ -83,12 +83,21 @@ export const LatestPost = ({ post, bookmark }) => {
       </div>
       <div className="flex flex-col gap-1">
         <div className="flex flex-col gap-1 cursor-pointer">
-          <div className="flex md:gap-1" onClick={userProfileHandler}>
-            <span className="font-bold tracking-wide">{name.firstName}</span>
-            <span className="font-bold tracking-wide">{name.lastName}</span>
-            <span className="text-gray-500">@{post.username}</span>
-            <span className="text-gray-500">.</span>
-            <span className="text-gray-500">{getPostDate(post.createdAt)}</span>
+          <div
+            className="flex flex-col sm:flex-row md:gap-1"
+            onClick={userProfileHandler}
+          >
+            <div>
+              <span className="font-bold tracking-wide">{name.firstName}</span>
+              <span className="font-bold tracking-wide">{name.lastName}</span>
+            </div>
+            <div>
+              <span className="text-gray-500">@{post.username}</span>
+              <span className="text-gray-500">.</span>
+              <span className="text-gray-500">
+                {getPostDate(post.createdAt)}
+              </span>
+            </div>
           </div>
           <p>{post.content}</p>
           {post?.img ? (
