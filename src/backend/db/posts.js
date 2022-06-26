@@ -193,6 +193,69 @@ export const posts = [
   },
   {
     _id: uuid(),
+    content: "I love the rain. It's my favorite weather.",
+    img: "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1656232135/rain_w1hx32.jpg",
+    imgAlt: "rain",
+    likes: {
+      likeCount: 3,
+      likedBy: [
+        {
+          _id: uuid(),
+          firstName: "Chandler",
+          lastName: "Bing",
+          username: "chandler_bing",
+          avatarURL: "",
+        },
+        {
+          _id: uuid(),
+          firstName: "Ross",
+          lastName: "Geller",
+          username: "ross_geller",
+          avatarURL: "",
+        },
+        {
+          _id: uuid(),
+          firstName: "test",
+          lastName: "test",
+          username: "test_test",
+          avatarURL:
+            "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1654849601/xbgauzp0wzv2czv5kqpo.jpg",
+        },
+      ],
+      dislikedBy: [],
+    },
+    username: "phobe_buffay",
+    comments: [
+      {
+        _id: uuid(),
+        username: "chandler_bing",
+        text: "Interesting",
+        avatarURL: "",
+        votes: {
+          upvotedBy: [],
+          downvotedBy: [],
+        },
+        createdAt: formatDate(),
+        updatedAt: formatDate(),
+      },
+      {
+        _id: uuid(),
+        username: "ross_geller",
+        text: "Wow!",
+        avatarURL: "",
+        votes: {
+          upvotedBy: [],
+          downvotedBy: [],
+        },
+        createdAt: formatDate(),
+        updatedAt: formatDate(),
+      },
+    ],
+    createdAt: "2022-06-06T18:08:40+05:30",
+    updatedAt: "2022-06-06T18:08:40+05:30",
+  },
+  {
+    _id: uuid(),
     content: "It's the imperfections that make things beautiful",
     img: null,
     imgAlt: "",
@@ -232,9 +295,10 @@ export const posts = [
       },
       {
         _id: uuid(),
-        username: "sohamshah",
+        username: "mark_darwin",
         text: "Wow!",
-        avatarURL: "",
+        avatarURL:
+          "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1654851622/uryrbl2p1lwo4y1ezgs1.jpg",
         votes: {
           upvotedBy: [],
           downvotedBy: [],

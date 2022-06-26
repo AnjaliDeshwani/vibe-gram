@@ -46,7 +46,7 @@ export const Home = () => {
             </div>
             <NewPost />
             <div className="border-b-2 border-b-gray-200 my-2"></div>
-            <SortPost setSortValue={setSortValue} />
+            <SortPost sortValue={sortValue} setSortValue={setSortValue} />
             <div className="border-b-2 border-b-gray-200 my-2"></div>
             {posts.length > 0 ? (
               posts.map((post) => <LatestPost post={post} key={post._id} />)

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { searchedUsersHandler } from "../../reducers/userSlice";
 import { SearchedUsersModal } from "../SearchedUsersModal/SearchedUsersModal";
@@ -6,16 +6,26 @@ import { SearchedUsersModal } from "../SearchedUsersModal/SearchedUsersModal";
 export const SearchBar = () => {
   const { searchedUsers } = useSelector((state) => state.users);
   const dispatch = useDispatch();
+  const searchRef = useRef();
 
-  const [searchText, setSearchText] = useState("");
-
-  const textChangeHandler = (e) => {
-    setSearchText(e.target.value);
+  const searchHandler = (e) =>
     dispatch(searchedUsersHandler({ searchedText: e.target.value }));
+
+  const debounce = (fn, delay) => {
+    let timer;
+    return (...args) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        fn(...args);
+      }, delay);
+    };
   };
 
+  const textChangeHandler = debounce(searchHandler, 300);
+
   const clearSearchedText = () => {
-    setSearchText("");
+    searchRef.current.value = "";
+    dispatch(searchedUsersHandler({ searchedText: "" }));
   };
 
   return (
@@ -28,11 +38,11 @@ export const SearchBar = () => {
           type="text"
           placeholder="Search Users"
           className="flex-grow bg-transparent mx-2 outline-none"
-          value={searchText}
+          ref={searchRef}
           onChange={textChangeHandler}
         />
 
-        {searchText && (
+        {searchRef.current?.value && (
           <span
             className="bg-sky-400 w-6 h-6 rounded-full flex items-center justify-center cursor-pointer hover:bg-sky-600"
             onClick={clearSearchedText}
@@ -42,7 +52,7 @@ export const SearchBar = () => {
         )}
       </div>
 
-      {searchText && (
+      {searchRef.current?.value && (
         <div className="bg-neutral-50 w-full mt-[0.5px] border-2 rounded-md p-2 flex flex-col gap-4 shadow-lg absolute z-10">
           {searchedUsers.length > 0 ? (
             searchedUsers.map((user) => (

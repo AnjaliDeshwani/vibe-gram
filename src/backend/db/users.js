@@ -76,7 +76,8 @@ export const users = [
         firstName: "Phobe",
         lastName: "Buffay",
         username: "phobe_buffay",
-        avatarURL: "",
+        avatarURL:
+          "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1656232294/Phoebe-Guitar_l4dmys.jpg",
       },
     ],
     followers: [
@@ -85,7 +86,8 @@ export const users = [
         firstName: "Phobe",
         lastName: "Buffay",
         username: "phobe_buffay",
-        avatarURL: "",
+        avatarURL:
+          "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1656232294/Phoebe-Guitar_l4dmys.jpg",
       },
       {
         _id: uuid(),
@@ -131,7 +133,8 @@ export const users = [
         firstName: "Phobe",
         lastName: "Buffay",
         username: "phobe_buffay",
-        avatarURL: "",
+        avatarURL:
+          "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1656232294/Phoebe-Guitar_l4dmys.jpg",
       },
     ],
     followers: [
@@ -140,7 +143,8 @@ export const users = [
         firstName: "Phobe",
         lastName: "Buffay",
         username: "phobe_buffay",
-        avatarURL: "",
+        avatarURL:
+          "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1656232294/Phoebe-Guitar_l4dmys.jpg",
       },
       {
         _id: uuid(),
@@ -178,6 +182,8 @@ export const users = [
         firstName: "Phobe",
         lastName: "Buffay",
         username: "phobe_buffay",
+        avatarURL:
+          "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1656232294/Phoebe-Guitar_l4dmys.jpg",
       },
     ],
     followers: [
@@ -186,7 +192,8 @@ export const users = [
         firstName: "Phobe",
         lastName: "Buffay",
         username: "phobe_buffay",
-        avatarURL: "",
+        avatarURL:
+          "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1656232294/Phoebe-Guitar_l4dmys.jpg",
       },
       {
         _id: uuid(),
@@ -208,7 +215,8 @@ export const users = [
     updatedAt: formatDate(),
     bio: "What should I put here?",
     website: "http://dummy.com/",
-    avatarURL: "",
+    avatarURL:
+      "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1656232294/Phoebe-Guitar_l4dmys.jpg",
     following: [
       {
         _id: uuid(),
@@ -255,7 +263,8 @@ export const users = [
         firstName: "Phobe",
         lastName: "Buffay",
         username: "phobe_buffay",
-        avatarURL: "",
+        avatarURL:
+          "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1656232294/Phoebe-Guitar_l4dmys.jpg",
       },
     ],
     followers: [
@@ -264,7 +273,8 @@ export const users = [
         firstName: "Phobe",
         lastName: "Buffay",
         username: "phobe_buffay",
-        avatarURL: "",
+        avatarURL:
+          "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1656232294/Phoebe-Guitar_l4dmys.jpg",
       },
       {
         _id: uuid(),
@@ -301,7 +311,8 @@ export const users = [
         firstName: "Phobe",
         lastName: "Buffay",
         username: "phobe_buffay",
-        avatarURL: "",
+        avatarURL:
+          "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1656232294/Phoebe-Guitar_l4dmys.jpg",
       },
     ],
     followers: [
@@ -310,7 +321,8 @@ export const users = [
         firstName: "Phobe",
         lastName: "Buffay",
         username: "phobe_buffay",
-        avatarURL: "",
+        avatarURL:
+          "https://res.cloudinary.com/dkwrbu6qr/image/upload/v1656232294/Phoebe-Guitar_l4dmys.jpg",
       },
     ],
   },
