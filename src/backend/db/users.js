@@ -12,7 +12,7 @@ export const users = [
     lastName: "test",
     email: "test@gmail.com",
     username: "test_test",
-    password: "test123",
+    password: "test@123",
     createdAt: formatDate(),
     updatedAt: formatDate(),
     bio: "Welcome to my world",

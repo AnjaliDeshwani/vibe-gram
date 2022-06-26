@@ -87,7 +87,7 @@ export const LatestPost = ({ post, bookmark }) => {
             className="flex flex-col sm:flex-row md:gap-1"
             onClick={userProfileHandler}
           >
-            <div>
+            <div className="flex gap-2">
               <span className="font-bold tracking-wide">{name.firstName}</span>
               <span className="font-bold tracking-wide">{name.lastName}</span>
             </div>

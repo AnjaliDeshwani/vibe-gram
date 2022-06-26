@@ -16,7 +16,7 @@ export const Login = () => {
 
   const guestLoginCred = {
     username: "test_test",
-    password: "test123",
+    password: "test@123",
   };
 
   const formChangeHandler = (e) => {
