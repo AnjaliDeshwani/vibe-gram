@@ -78,7 +78,7 @@ export const EditProfileModal = ({ setEditModal }) => {
         onClick={closeEditModal}
       >
         <div
-          className="w-[30%] bg-white ring-1 ring-gray-300 shadow-inner p-4 rounded-sm"
+          className="w-full sm:w-[30%] bg-white ring-1 ring-gray-300 shadow-inner p-4 rounded-sm"
           onClick={(e) => e.stopPropagation()}
         >
           <form className="flex flex-col gap-2.5" onSubmit={saveEditedDetails}>

@@ -36,11 +36,12 @@ export const CommentOptionsModal = ({
     userToFollow,
     loggedInUser.following
   );
-  const userFollowingHandler = () => {
+  const userFollowingHandler = (e) => {
     alreadyFollowing
       ? dispatch(unFollowUser({ followUserId: userToFollow._id, token }))
       : dispatch(followUser({ followUserId: userToFollow._id, token }));
     setShowCommentOptionsModal(false);
+    e.stopPropagation();
   };
 
   return (
@@ -67,7 +68,7 @@ export const CommentOptionsModal = ({
           ) : (
             <span
               className="flex gap-3 p-2 items-center cursor-pointer hover:bg-neutral-300 hover:bg-opacity-30"
-              onClick={() => userFollowingHandler()}
+              onClick={(e) => userFollowingHandler(e)}
             >
               <i
                 className={`fa-solid fa-user-${

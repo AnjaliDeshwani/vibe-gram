@@ -18,17 +18,17 @@ export const ProfileDetails = ({ currentUser }) => {
   });
   const [editModal, setEditModal] = useState(false);
 
-  const isLoggedInUser = currentUser.username === user.username;
+  const isLoggedInUser = currentUser?.username === user?.username;
   const loggedInUser = allUsers.find(
-    (dbUser) => dbUser.username === user.username
+    (dbUser) => dbUser.username === user?.username
   );
 
   const { firstName, lastName, username, bio, website, followers, following } =
-    currentUser;
+    currentUser || "";
 
   const alreadyFollowing = isUserFollowAnotherUser(
     currentUser,
-    loggedInUser.following
+    loggedInUser?.following
   );
 
   const userFollowingHandler = () => {
@@ -58,7 +58,7 @@ export const ProfileDetails = ({ currentUser }) => {
         <div className="p-4 grid grid-cols-[8rem_1fr] gap-8">
           <UserAvatar user={currentUser} profile={true} />
           <div className="flex flex-col gap-4">
-            <div className="flex justify-between">
+            <div className="flex justify-between flex-col gap-4 md:flex-row">
               <div className="flex flex-col">
                 <span className="font-bold tracking-wide">
                   {firstName} {lastName}
@@ -79,35 +79,37 @@ export const ProfileDetails = ({ currentUser }) => {
                 </div>
               ) : (
                 <button
-                  className="self-center px-4 py-1 text-center font-semibold  rounded-full bg-gradient-to-r from-sky-400 to-cyan-300"
+                  className="self-center px-4 py-1 text-center font-semibold  rounded-full bg-gradient-to-r from-sky-400 to-cyan-300 self-baseline"
                   onClick={() => userFollowingHandler()}
                 >
                   {alreadyFollowing ? "Unfollow" : "Follow"}
                 </button>
               )}
             </div>
-            <p className="font-semibold">{bio}</p>
-            <a
-              href={website}
-              target="_blank"
-              rel="noreferrer"
-              className="hover:underline text-sky-600"
-            >
-              <i className="fa-solid fa-link mr-1 text-xs"></i>
-              {website}
-            </a>
+            {bio && <p className="font-semibold">{bio}</p>}
+            {website && (
+              <a
+                href={website}
+                target="_blank"
+                rel="noreferrer"
+                className="hover:underline text-sky-600"
+              >
+                <i className="fa-solid fa-link mr-1 text-xs"></i>
+                {website}
+              </a>
+            )}
             <div className="flex gap-3">
               <span
                 className="hover:underline cursor-pointer font-semibold"
-                onClick={() => openFollowModal("Follow")}
+                onClick={() => openFollowModal("Followers")}
               >
-                <span>{followers.length}</span> <span>Followers</span>
+                <span>{followers?.length}</span> <span>Followers</span>
               </span>
               <span
                 className="hover:underline cursor-pointer font-semibold"
                 onClick={() => openFollowModal("Following")}
               >
-                <span>{following.length}</span> <span>Following</span>
+                <span>{following?.length}</span> <span>Following</span>
               </span>
             </div>
           </div>

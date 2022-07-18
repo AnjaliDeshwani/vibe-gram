@@ -43,7 +43,10 @@ export const PostOptionsModal = ({
   };
 
   return (
-    <div className="absolute z-10 right-8 top-12 ring-1 ring-gray-300 bg-neutral-50 shadow-2xl w-36">
+    <div
+      className="absolute z-10 right-8 top-12 ring-1 ring-gray-300 bg-neutral-50 shadow-2xl w-36"
+      onClick={(e) => e.stopPropagation()}
+    >
       {user.username === username ? (
         <div className="flex flex-col gap-2">
           <span
